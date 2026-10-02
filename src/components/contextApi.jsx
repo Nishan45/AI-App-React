@@ -11,9 +11,11 @@ export const AuthProvider = ({ children }) => {
 
   // Load user data from localStorage on initial app load (handles refreshes)
   useEffect(() => {
-    const storedUser = localStorage.getItem('user_profile');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem('user_profile');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
     }
     setLoading(false);
   }, []);
@@ -21,13 +23,17 @@ export const AuthProvider = ({ children }) => {
   // Login function called by your Login component
   const login = (userData) => {
     setUser(userData);
-    localStorage.setItem('user_profile', JSON.stringify(userData));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('user_profile', JSON.stringify(userData));
+    }
   };
 
   // Logout function
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user_profile');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('user_profile');
+    }
   };
 
   return (

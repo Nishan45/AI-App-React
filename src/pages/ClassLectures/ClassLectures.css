@@ -1,0 +1,148 @@
+.page.lectures-page{
+  position: relative;
+}
+.lecture-list {
+  display: grid;
+  gap: 13px;
+  max-width: 1050px;
+}
+.lecture-module {
+  overflow: hidden;
+  transition: 0.2s ease;
+}
+.lecture-module.current-module {
+  border-color: #9ccdfb;
+  box-shadow:
+    0 0 0 2px #e5f3ff,
+    var(--shadow);
+}
+.module-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 15px 18px;
+  border: 0;
+  background: #fff;
+  text-align: left;
+  color: #17365f;
+}
+.current-module .module-header {
+  background: #eef8ff;
+}
+.module-header strong {
+  flex: 1;
+  font-size: 12px;
+}
+.module-header em {
+  font-style: normal;
+  font-size: 8px;
+  color: #1671d8;
+  background: #d9efff;
+  border-radius: 999px;
+  padding: 5px 8px;
+}
+.module-header svg {
+  width: 15px;
+  color: #8396ad;
+  transition: 0.2s;
+}
+.module-header .rotated {
+  transform: rotate(180deg);
+}
+.book-icon {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  color: #1572dc;
+  background: #e7f3ff;
+  font-size: 11px;
+}
+.lesson-list {
+  border-top: 1px solid #eaf0f6;
+  padding: 4px 18px 8px;
+}
+.lesson-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid #edf2f7;
+}
+.lesson-row:last-child {
+  border-bottom: 0;
+}
+.lesson-info {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex: 1;
+  min-width: 0;
+}
+.lesson-info svg {
+  color: #1775e7;
+}
+.lesson-info strong {
+  font-size: 10px;
+  color: #375575;
+}
+.lesson-row time {
+  font-size: 9px;
+  color: #8b9ab0;
+}
+.lesson-row .btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 11px;
+}
+
+.lecture-video-window {
+  position: absolute;
+  top: -64px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.lecture-video-nav {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #E5E7EB;
+  height: 64px;
+  box-sizing: border-box;
+}
+
+.lecture-video-back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #4B5563;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+
+
+@media (max-width: 600px) {
+  .lesson-row {
+    gap: 8px;
+  }
+  .lesson-row time {
+    display: none;
+  }
+}

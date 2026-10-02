@@ -1,0 +1,232 @@
+
+.buddy-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 16px;
+}
+.chat-card {
+  padding: 20px;
+  height: calc(100vh - 185px);
+  /* min-height: 520px; */
+  /* height: 70vh; */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.chat-hero {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px;
+  border: 1px solid #e1ecf7;
+  background: linear-gradient(135deg, #f5fbff, #edf7ff);
+  border-radius: 13px;
+}
+.chat-hero strong {
+  font-size: 12px;
+  color: #153962;
+}
+.chat-hero p {
+  font-size: 9px;
+  color: #778ba3;
+  margin: 5px 0 0;
+  line-height: 1.5;
+}
+.thinking-bot {
+  position: relative;
+  width: 65px;
+  height: 65px;
+  flex: 0 0 auto;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #fff, #bde5ff);
+  display: grid;
+  place-items: center;
+  color: #075ab9;
+  font-size: 22px;
+  box-shadow: 0 10px 20px rgba(33, 117, 190, 0.15);
+}
+.thinking-bot:before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 2px dashed #6fb9f7;
+  border-radius: 23px;
+  animation: spin 6s linear infinite;
+}
+.thinking-bot i {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  right: -5px;
+  top: 2px;
+  border-radius: 50%;
+  background: #1679ed;
+  box-shadow: 10px 10px 0 #8d5ce8;
+}
+.suggestions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+.suggestions button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  border: 1px solid #dceafa;
+  border-radius: 999px;
+  background: #fff;
+  color: #24608e;
+  font-size: 9px;
+}
+.messages {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding: 10px 5px 10px 2px;
+  scroll-behavior: smooth;
+  
+  /* Chrome, Safari, and newer Edge versions */
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  /* Firefox */
+  scrollbar-width: none !important;
+  
+  /* Internet Explorer and Legacy Edge */
+  -ms-overflow-style: none !important;
+
+}
+.message {
+  display: flex;
+  gap: 8px;
+  max-width: 78%;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #385574;
+}
+.message.bot {
+  align-self: flex-start;
+}
+.message.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+.message > div:last-child {
+  padding: 10px 12px;
+  border-radius: 11px;
+  background: #f2f7fc;
+}
+.message.user > div:last-child {
+  color: #fff;
+  background: #1575e5;
+}
+.message-icon {
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #e6f3ff;
+  color: #1472db;
+}
+.chat-input {
+  flex: 0 0 40px;
+  display: flex;
+  gap: 7px;
+  margin-top: 10px;
+  background: #fff;
+}
+.chat-input input {
+  min-width: 0;
+  flex: 1;
+  height: 40px;
+  border: 1px solid #dbe8f5;
+  border-radius: 8px;
+  padding: 0 12px;
+  outline: 0;
+  font-size: 10px;
+}
+.chat-input button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0 13px;
+  color: #fff;
+  background: #1677ed;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.buddy-side {
+  padding: 20px;
+  height: max-content;
+}
+.side-title {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+.side-title > svg {
+  color: #8b5ce7;
+}
+.side-title strong,
+.side-title span {
+  display: block;
+}
+.side-title strong {
+  font-size: 11px;
+  color: #25486d;
+}
+.side-title span {
+  font-size: 8px;
+  color: #8999ad;
+  margin-top: 3px;
+}
+.buddy-side ol {
+  padding-left: 24px;
+  color: #55718e;
+}
+.buddy-side li {
+  padding: 9px 0;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 9px;
+  line-height: 1.45;
+}
+.buddy-tip {
+  display: flex;
+  gap: 7px;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f4f9ff;
+  color: #69819c;
+  font-size: 8px;
+  line-height: 1.5;
+}
+.buddy-tip svg {
+  flex: 0 0 auto;
+  color: #1473df;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 850px) {
+  .buddy-grid {
+    grid-template-columns: 1fr;
+  }
+  .buddy-side {
+    display: none;
+  }
+}

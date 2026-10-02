@@ -1,0 +1,744 @@
+.learning-resources-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px 34px;
+  box-sizing: border-box;
+  background: white;
+  color: #24496f;
+  font-family: inherit;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.resources-header {
+  margin-bottom: 30px;
+}
+
+.resources-header h1 {
+  color: #163f6d;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+
+}
+
+.resources-header p {
+  margin: 0;
+  color: #8294a7;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================
+   TABS
+========================= */
+
+.resource-tabs {
+  display: flex;
+  width: fit-content;
+  margin-bottom: 15px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #d9e5ef;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(35, 80, 120, 0.04);
+}
+
+.resource-tab {
+  width: 180px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-right: 1px solid #d9e5ef;
+  background: #ffffff;
+  color: #71869a;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.resource-tab:last-child {
+  border-right: none;
+}
+
+.resource-tab:hover {
+  background: #f4f9fd;
+  color: #1976bd;
+}
+
+.resource-tab.active {
+  background: #eaf5ff;
+  color: #1474c4;
+  box-shadow: inset 0 -2px 0 #2385d0;
+}
+
+/* =========================
+   MODULE DROPDOWN
+========================= */
+
+.module-dropdown-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+  z-index: 20;
+}
+
+.module-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  min-height: 68px;
+
+  padding: 10px 18px;
+
+  border: 1px solid #d2e1ed;
+  border-radius: 11px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 2px 5px rgba(35, 83, 122, 0.03),
+    0 7px 20px rgba(35, 83, 122, 0.035);
+
+  color: #315675;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.module-selector:hover {
+  border-color: #a9c9df;
+  background: #fcfeff;
+}
+
+.module-selector.dropdown-active {
+  border-color: #4a97cd;
+
+  box-shadow:
+    0 0 0 3px rgba(74, 151, 205, 0.08),
+    0 8px 22px rgba(35, 83, 122, 0.06);
+}
+
+/* left side */
+
+.module-selector-left {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+/* icon */
+
+.module-book-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 13px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    #e8f5ff,
+    #dff0fc
+  );
+
+  color: #1879c2;
+
+  box-shadow: inset 0 0 0 1px rgba(43, 132, 194, 0.06);
+}
+
+.module-book-icon span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* text */
+
+.module-selector-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 0;
+}
+
+.module-label {
+  margin-bottom: 4px;
+
+  color: #9aaaba;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+}
+
+.selected-module-name {
+  max-width: 100%;
+
+  overflow: hidden;
+
+  color: #315675;
+
+  font-size: 12px;
+  font-weight: 650;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* arrow */
+
+.module-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  color: #6c8499;
+
+  font-size: 19px;
+  font-weight: 700;
+
+  transition: transform 0.2s ease;
+}
+
+.module-arrow.arrow-up {
+  transform: rotate(180deg);
+}
+
+/* =========================
+   CUSTOM DROPDOWN MENU
+========================= */
+
+.module-dropdown-menu {
+  position: absolute;
+
+  top: calc(100% + 7px);
+  left: 0;
+  right: 0;
+
+  padding: 7px;
+
+  background: #ffffff;
+
+  border: 1px solid #d6e4ee;
+  border-radius: 11px;
+
+  box-shadow:
+    0 12px 30px rgba(30, 75, 112, 0.12),
+    0 3px 8px rgba(30, 75, 112, 0.05);
+
+  animation: dropdownOpen 0.16s ease-out;
+
+  overflow: hidden;
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* individual option */
+
+.module-option {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 55px;
+
+  padding: 7px 10px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  font-family: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.module-option:hover {
+  background: #f3f9fd;
+}
+
+.module-option.selected {
+  background: #edf7ff;
+}
+
+/* option icon */
+
+.option-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 10px;
+
+  border-radius: 8px;
+
+  background: #eef7fd;
+  color: #2380c3;
+}
+
+.option-icon span {
+  font-size: 15px;
+}
+
+/* option text */
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  flex: 1;
+}
+
+.option-module {
+  margin-bottom: 2px;
+
+  color: #365c7b;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.option-name {
+  overflow: hidden;
+
+  color: #8a9baa;
+
+  font-size: 9px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* selected check */
+
+.selected-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 23px;
+  height: 23px;
+
+  margin-left: 8px;
+
+  border-radius: 50%;
+
+  background: #197bc1;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* =========================
+   RESOURCE LIST
+========================= */
+
+.resource-list {
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #d4e2ec;
+  border-radius: 10px;
+
+  box-shadow:
+    0 2px 6px rgba(35, 83, 122, 0.03),
+    0 7px 18px rgba(35, 83, 122, 0.025);
+}
+
+.resource-item {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 64px;
+
+  padding: 10px 15px;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid #e8eef3;
+
+  transition:
+    background 0.15s ease,
+    padding-left 0.15s ease;
+}
+
+.resource-item:last-child {
+  border-bottom: none;
+}
+
+.resource-item:hover {
+  background: #fbfdff;
+  padding-left: 18px;
+}
+
+/* =========================
+   PDF ICON
+========================= */
+
+.pdf-icon {
+  position: relative;
+
+  width: 32px;
+  height: 40px;
+  min-width: 32px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  margin-right: 13px;
+
+  padding-bottom: 6px;
+
+  box-sizing: border-box;
+
+  border-radius: 4px;
+
+  background: #ef4c4c;
+  color: #ffffff;
+
+  box-shadow: 0 2px 6px rgba(239, 76, 76, 0.14);
+}
+
+.pdf-icon span {
+  font-size: 6px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.pdf-fold {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 0;
+  height: 0;
+
+  border-top: 10px solid #ffffff;
+  border-left: 10px solid transparent;
+}
+
+/* =========================
+   RESOURCE DETAILS
+========================= */
+
+.resource-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.resource-details h3 {
+  margin: 0 0 4px;
+
+  overflow: hidden;
+
+  color: #315675;
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.resource-meta {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: #91a0ae;
+
+  font-size: 8px;
+}
+
+.pdf-label {
+  color: #df4b4b;
+  font-weight: 700;
+}
+
+.meta-separator {
+  color: #b8c4ce;
+}
+
+/* =========================
+   DOWNLOAD BUTTON
+========================= */
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 82px;
+  height: 28px;
+  min-width: 82px;
+
+  margin-left: 15px;
+
+  border-radius: 6px;
+
+  background: #147bd2;
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-family: inherit;
+  font-size: 8px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.download-btn:hover {
+  background: #0969bb;
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 4px 9px rgba(20, 123, 210, 0.18);
+}
+
+.download-btn:active {
+  transform: translateY(0);
+}
+
+.download-symbol {
+  margin-right: 5px;
+
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-resources {
+  padding: 60px 20px;
+
+  text-align: center;
+}
+
+.empty-icon {
+  margin-bottom: 10px;
+
+  font-size: 30px;
+}
+
+.empty-resources h3 {
+  margin: 0 0 6px;
+
+  color: #344054;
+
+  font-size: 14px;
+}
+
+.empty-resources p {
+  margin: 0;
+
+  color: #8292a5;
+
+  font-size: 10px;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 850px) {
+  .learning-resources-page {
+    padding: 26px 22px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .learning-resources-page {
+    padding: 21px 14px;
+  }
+  .resources-header h1{
+    font-size: 18px;
+  }
+
+  .resources-header p {
+    font-size: 11px;
+  }
+
+  .resource-tabs {
+    width: 100%;
+  }
+
+  .resource-tab {
+    flex: 1;
+    width: auto;
+  }
+
+  .module-selector {
+    min-height: 62px;
+    padding: 9px 13px;
+  }
+
+  .module-book-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    margin-right: 10px;
+  }
+
+  .selected-module-name {
+    max-width: calc(100vw - 115px);
+    font-size: 11px;
+  }
+
+  .module-dropdown-menu {
+    padding: 6px;
+  }
+
+  .module-option {
+    min-height: 52px;
+  }
+
+  .option-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .resource-item {
+    min-height: 62px;
+    padding: 9px;
+  }
+
+  .resource-item:hover {
+    padding-left: 11px;
+  }
+
+  .pdf-icon {
+    width: 29px;
+    height: 36px;
+    min-width: 29px;
+    margin-right: 9px;
+  }
+
+  .resource-details h3 {
+    font-size: 9px;
+  }
+
+  .resource-meta {
+    font-size: 7px;
+  }
+
+  .download-btn {
+    width: 67px;
+    min-width: 67px;
+    height: 26px;
+    margin-left: 8px;
+    font-size: 7px;
+  }
+}
+
+/* =========================
+   VERY SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+  .learning-resources-page {
+    padding: 18px 10px;
+  }
+
+  .module-selector {
+    min-height: 58px;
+    padding: 8px 10px;
+  }
+
+  .module-book-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+
+  .module-label {
+    font-size: 7px;
+  }
+
+  .selected-module-name {
+    font-size: 10px;
+    max-width: calc(100vw - 100px);
+  }
+
+  .option-module {
+    font-size: 9px;
+  }
+
+  .option-name {
+    font-size: 8px;
+  }
+
+  .download-btn {
+    width: 57px;
+    min-width: 57px;
+    font-size: 6.5px;
+  }
+
+  .download-symbol {
+    display: none;
+  }
+}

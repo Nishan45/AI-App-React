@@ -1,0 +1,269 @@
+.progress-summary {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(3, 1fr);
+  gap: 13px;
+  margin-bottom: 16px;
+}
+.overall-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 130px;
+}
+.ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(#1b79eb 0 68%, #e8f0f7 68%);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.ring:after {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  background: #fff;
+  border-radius: 50%;
+}
+.ring > div {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.ring strong,
+.ring span {
+  display: block;
+}
+.ring strong {
+  font-size: 15px;
+  color: #173d70;
+}
+.ring span {
+  font-size: 7px;
+  color: #8999ac;
+  margin-top: 2px;
+}
+.summary-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px;
+}
+.summary-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  color: #1773df;
+  background: #e8f3ff;
+  border-radius: 9px;
+}
+.summary-icon svg {
+  width: 17px;
+}
+.summary-card strong,
+.summary-card span {
+  display: block;
+}
+.summary-card strong {
+  font-size: 18px;
+  color: #153862;
+}
+.summary-card span {
+  font-size: 8px;
+  color: #8292a7;
+  margin-top: 3px;
+}
+.summary-card.Quizzes.Attempted{
+  background-color: #F0FDF4;
+}
+.summary-card.Quizzes.Attempted strong{
+  color: #166534;
+}
+.summary-card.Quizzes.Attempted span{
+  color: #15803D
+}
+.summary-card.Quizzes.Attempted .summary-icon{
+  background-color: #DCFCE7;
+}
+.summary-card.Assignments.Done{
+  background-color: #F5F3FF;
+}
+.summary-card.Assignments.Done strong{
+  color: #5B21B6;
+}
+.summary-card.Assignments.Done span{
+  color: #6D28D9
+}
+.summary-card.Assignments.Done .summary-icon{
+  background-color: #EDE9FE;
+}
+
+.summary-card.Projects.Completed{
+  background-color: #FEFCE8;
+}
+.summary-card.Projects.Completed strong{
+  color: #854D0E;
+}
+.summary-card.Projects.Completed span{
+  color: #A16207
+}
+.summary-card.Projects.Completed .summary-icon{
+  background-color: #FEF9C3;
+}
+
+.learning-progress {
+  overflow: hidden;
+}
+.progress-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid #e8eef6;
+  padding: 0 17px;
+}
+.progress-tabs button {
+  border: 0;
+  background: transparent;
+  color: #7c8da3;
+  padding: 13px 14px;
+  font-size: 9px;
+  border-bottom: 2px solid transparent;
+}
+.progress-tabs .active {
+  color: #126dd6;
+  border-color: #1677e9;
+  font-weight: 800;
+}
+.table-wrap {
+  overflow: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+th,
+td {
+  text-align: left;
+  padding: 11px 17px;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 9px;
+}
+th {
+  color: #183c67;
+  font-size: 10px;
+  font-weight: 700;
+}
+td {
+  color: #385574;
+}
+.table-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 130px;
+}
+.table-progress .progress-track {
+  height: 6px;
+  flex: 1;
+}
+.status {
+  font-size: 8px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.status.completed {
+  color: #07805c;
+  background: #ddf7ed;
+}
+.status.in-progress {
+  color: #b77805;
+  background: #fff0cf;
+}
+.achievement-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+  margin-top: 14px;
+}
+.achievement-card,
+.rating-card {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.achievement-card > svg {
+  color: #f2ae20;
+  fill: #fff1bf;
+}
+.achievement-card strong,
+.achievement-card b,
+.achievement-card span {
+  display: block;
+}
+.achievement-card strong {
+  font-size: 9px;
+  color: #3a5673;
+}
+.achievement-card b {
+  font-size: 18px;
+  color: #0d67d1;
+  margin-top: 4px;
+}
+.achievement-card span,
+.rating-card span {
+  font-size: 8px;
+  color: #8b9aad;
+}
+.rating-card {
+  display: block;
+}
+.rating-card strong {
+  font-size: 10px;
+  color: #395774;
+}
+.stars {
+  color: #f2ae20;
+  font-size: 17px;
+  letter-spacing: 2px;
+  margin: 5px 0;
+}
+@media (max-width: 950px) {
+  .progress-summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .overall-card {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 650px) {
+  .progress-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+  .overall-card {
+    grid-column: 1/-1;
+  }
+  .achievement-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.progress-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 17px;
+  border-bottom: 1px solid #e8eef6;
+}
+.progress-section-title h3 {
+  margin: 0;
+  font-size: 11px;
+  color: #183c67;
+}
+.progress-section-title span {
+  font-size: 8px;
+  color: #8b9aad;
+}

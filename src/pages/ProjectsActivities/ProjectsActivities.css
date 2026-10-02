@@ -1,0 +1,98 @@
+.project-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+.project-tabs button {
+  border: 0;
+  background: transparent;
+  color: #7789a0;
+  padding: 9px 20px;
+  font-size: 10px;
+  border-bottom: 2px solid transparent;
+}
+.project-tabs .active {
+  color: #126bd4;
+  border-color: #1474e6;
+  font-weight: 800;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.project-section {
+  overflow: hidden;
+}
+.project-section h3 {
+  margin: 0;
+  padding: 16px 17px 10px;
+  color: #183c67;
+  font-size: 11px;
+}
+.project-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 17px;
+  border-top: 1px solid #edf2f7;
+}
+.project-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  color: #12a77a;
+  background: #e0f8ef;
+  border-radius: 8px;
+}
+.project-info {
+  flex: 1;
+}
+.project-info strong,
+.project-info span {
+  display: block;
+}
+.project-info strong {
+  font-size: 12px;
+  color: #345576;
+}
+.project-info span {
+  font-size: 8px;
+  color: #8b9caf;
+  margin-top: 3px;
+}
+.project-status {
+  font-size: 10px;
+  font-weight: 700;
+  color: #1370d8;
+  background: #edf6ff;
+  padding: 5px 8px;
+  border-radius: 999px;
+}
+.project-status-overdue {
+  font-size: 10px;
+  font-weight: 700;
+  color: red;
+  background: #f6c0b4;
+  padding: 5px 8px;
+  border-radius: 999px;
+}
+
+.view-arrow {
+  border: 1px solid #d8e6f3;
+  background: #fff;
+  color: #65809f;
+  border-radius: 6px;
+  padding: 4px;
+  display: grid;
+}
+@media (max-width: 800px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.single-project-section {
+  max-width: 1050px;
+}

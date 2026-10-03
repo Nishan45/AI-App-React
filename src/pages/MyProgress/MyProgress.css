@@ -1,3 +1,10 @@
+
+.progress-page .table-progress .progress-fill{
+  background: linear-gradient(90deg, #2788fa, #0e6be5);
+  animation: moduleProgress 0.9s ease-out both;
+  transform-origin: left;
+}
+
 .progress-summary {
   display: grid;
   grid-template-columns: 1.5fr repeat(3, 1fr);
@@ -14,11 +21,13 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: conic-gradient(#1b79eb 0 68%, #e8f0f7 68%);
+  background: conic-gradient(#1b79eb 0 calc(var(--module-percentage, 0) * 1%), #e8f0f7 calc(var(--module-percentage, 0) * 1%));
   display: grid;
   place-items: center;
   position: relative;
+  transform-origin: center; 
 }
+
 .ring:after {
   content: "";
   position: absolute;

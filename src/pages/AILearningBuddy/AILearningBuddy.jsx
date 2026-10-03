@@ -6,6 +6,7 @@ import {
   Send,
   Sparkles,
   UserRound,
+  
 } from "lucide-react";
 import "./AILearningBuddy.css";
 
@@ -41,7 +42,7 @@ export default function AILearningBuddy() {
     <div className="page buddy-page">
       <div className="page-title-row">
         <div>
-          <h4 style={{margin:0}}>🤖 Curious about a topic? Fire away with your questions.</h4>
+          <h4 style={{margin:0, fontSize:"14px",gap:"8px",display:"flex"}}><Bot size={18} style={{flexShrink:0}}/> Curious about a topic? Fire away with your questions.</h4>
         </div>
       </div>
       <div className="buddy-grid">

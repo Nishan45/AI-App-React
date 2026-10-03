@@ -6,7 +6,13 @@ const AuthContext = createContext(null);
 
 // 2. Create the Provider Component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem('user_profile');
+      return storedUser ? JSON.parse(storedUser) : null;
+    }
+    return null;
+  });
   const [loading, setLoading] = useState(true);
 
   // Load user data from localStorage on initial app load (handles refreshes)

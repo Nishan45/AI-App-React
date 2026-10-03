@@ -1,34 +1,51 @@
-import React from "react";
+import React, { useRef } from "react";
 import { ChevronDown, Play, PlayCircle } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import { modules } from "../../data/courseData";
 import "./ClassLectures.css";
 import YouTubeTracker from "../../components/YoutubeTracker";
 import { useAuth } from "../../components/contextApi";
+import {
+  Bot,
+} from "lucide-react";
 
 export default function ClassLectures() {
   const [params, setParams] = useSearchParams();
   const selected = Number(params.get("module")) || 1;
   const [open, setOpen] = React.useState([selected - 1]);
-  const [lecture,setLecture]=React.useState(modules[selected].lessons[0]);
+  const [lecture,setLecture]=React.useState(modules[selected-1].lessons[0]);
   const [isOpen, setIsOpen] = React.useState(false);
   const {user}=useAuth();
+  const currentModuleRef = useRef(null);
+
   React.useEffect(
     () => setOpen((v) => (v.includes(selected - 1) ? v : [selected - 1])),
     [selected],
   );
+
+  React.useEffect(() => {
+    // Check if a valid module query parameter exists in the URL
+    if (params.get("module") && currentModuleRef.current) {
+      currentModuleRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center", // Options: "start", "center", "end", "nearest"
+      });
+    }
+  }, [selected]);
+
   const toggle = (i) =>
     setOpen((v) => (v.includes(i) ? v.filter((x) => x !== i) : [...v, i]));
   return (
     <div className="page lectures-page">
       <div className="page-title-row">
-          <h1 className="page-title">🤖 Welcome, {user.firstName}. Your class lectures are ready</h1> 
+          <h1 style={{display:"flex",gap:"8px"}} className="page-title"><Bot size={18} style={{flexShrink:0}}/> Welcome, {user.firstName}. Your class lectures are ready below 👇</h1> 
       </div>
       {!isOpen && (
         <div className="lecture-list">
           {modules.map((m, i) => (
             <section
-              className={`card lecture-module ${m.id === selected ? "current-module" : ""}`}
+              ref={m.id === selected ? currentModuleRef : null}
+              className={`card lecture-module ${m.id=== selected ? "current-module" : ""}`}
               key={m.id}
             >
               <button
@@ -49,7 +66,7 @@ export default function ClassLectures() {
               </button>
               {open.includes(i) && (
                 <div className="lesson-list">
-                  {m.lessons.map(([name, time,link]) => (
+                  {m.lessons.map(([name,time,link]) => (
                     <div className="lesson-row" key={name}>
                       <div className="lesson-info">
                         <PlayCircle size={18} />
@@ -156,7 +173,7 @@ export default function ClassLectures() {
                     letterSpacing: "-0.025em",
                   }}
                 >
-                  Module {selected}: {modules[selected].title}
+                  Module {selected}: {modules[selected-1].title}
                 </h2>
                 <p
                   style={{
@@ -166,7 +183,7 @@ export default function ClassLectures() {
                     lineHeight: "1.5",
                   }}
                 >
-                  {lecture[0]} 🤖 👉 {modules[selected].desc}
+                  {lecture[0]} 🤖 👉 {modules[selected-1].desc}
                 </p>
               </div>
             </div>

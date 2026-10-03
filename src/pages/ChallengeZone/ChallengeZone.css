@@ -27,7 +27,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
@@ -44,27 +44,29 @@
 .challenge-heading p {
   margin: 8px 0 0;
   color: #6c7a8d;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .challenge-count {
-  min-width: 80px;
-  padding: 14px 20px;
+  min-width: 100px;
+  padding: 10px 10px;
   border: 1px solid #dce8f5;
-  border-radius: 16px;
+  border-radius: 10px;
   background: #f7fbff;
   text-align: center;
+  display: grid;
+  grid-template-columns: 20% 80%;
 }
 
 .challenge-count strong {
   display: block;
   color: #1679d2;
-  font-size: 24px;
+  font-size: 14px;
 }
 
 .challenge-count span {
-  color: #718096;
-  font-size: 13px;
+  color: #3c424e;
+  font-size: 14px;
 }
 
 /* =====================================================
@@ -154,7 +156,7 @@
 .quiz-card h2 {
   margin: 10px 0 7px;
   color: #17283d;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .quiz-card p {
@@ -620,6 +622,16 @@
     }
 }
 @media (max-width: 700px) {
+    .challenge-count {
+      min-width: 80px;
+      padding: 10px 10px;
+      border: 1px solid #dce8f5;
+      border-radius: 10px;
+      background: #f7fbff;
+      text-align: center;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
     .quiz-topbar .quiz-header{
         display: none;
     }

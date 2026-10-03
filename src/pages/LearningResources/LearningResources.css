@@ -18,7 +18,7 @@
 
 .resources-header h1 {
   color: #163f6d;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
 
@@ -41,9 +41,10 @@
   margin-bottom: 15px;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid #d9e5ef;
+  gap:5px;
+  /* border: 1px solid #d9e5ef;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(35, 80, 120, 0.04);
+  box-shadow: 0 2px 8px rgba(35, 80, 120, 0.04); */
 }
 
 .resource-tab {
@@ -51,7 +52,8 @@
   height: 40px;
   padding: 0;
   border: none;
-  border-right: 1px solid #d9e5ef;
+  border-radius: 8px;
+  /* border-right: 1px solid #d9e5ef; */
   background: #ffffff;
   color: #71869a;
   font-family: inherit;
@@ -59,11 +61,14 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  border: 1px solid #d9e5ef;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(35, 80, 120, 0.04);
 }
 
-.resource-tab:last-child {
+/* .resource-tab:last-child {
   border-right: none;
-}
+} */
 
 .resource-tab:hover {
   background: #f4f9fd;
@@ -73,7 +78,7 @@
 .resource-tab.active {
   background: #eaf5ff;
   color: #1474c4;
-  box-shadow: inset 0 -2px 0 #2385d0;
+  box-shadow: inset -1px -1px 1px #2385d0;
 }
 
 /* =========================
@@ -104,8 +109,7 @@
   background: #ffffff;
 
   box-shadow:
-    0 2px 5px rgba(35, 83, 122, 0.03),
-    0 7px 20px rgba(35, 83, 122, 0.035);
+    0 5px 10px rgba(35, 83, 122, 0.03);
 
   color: #315675;
   font-family: inherit;
@@ -381,39 +385,29 @@
 
 .resource-list {
   width: 100%;
-
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   overflow: hidden;
-
+  gap: 10px;
   background: #ffffff;
-
-  border: 1px solid #d4e2ec;
-  border-radius: 10px;
-
-  box-shadow:
-    0 2px 6px rgba(35, 83, 122, 0.03),
-    0 7px 18px rgba(35, 83, 122, 0.025);
 }
 
 .resource-item {
   display: flex;
   align-items: center;
-
-  width: 100%;
+  border-radius: 10px;
+  /* width: 100%; */
   min-height: 64px;
-
   padding: 10px 15px;
-
   box-sizing: border-box;
-
-  border-bottom: 1px solid #e8eef3;
-
+  /* border-bottom: 1px solid #e8eef3; */
+  border: 1px solid #e8eef3;
+  box-shadow:
+    0 2px 6px rgba(35, 83, 122, 0.03),
+    0 7px 18px rgba(35, 83, 122, 0.025);
   transition:
     background 0.15s ease,
     padding-left 0.15s ease;
-}
-
-.resource-item:last-child {
-  border-bottom: none;
 }
 
 .resource-item:hover {
@@ -476,6 +470,7 @@
 .resource-details {
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 .resource-details h3 {
@@ -488,8 +483,8 @@
   font-size: 12px;
   font-weight: 600;
   line-height: 1.35;
-
-  white-space: nowrap;
+  
+  /* white-space: nowrap; */
   text-overflow: ellipsis;
 }
 
@@ -596,6 +591,11 @@
   font-size: 10px;
 }
 
+@media(max-width:1200px){
+  .resource-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 /* =========================
    TABLET
 ========================= */
@@ -611,11 +611,14 @@
 ========================= */
 
 @media (max-width: 600px) {
+  .resource-list {
+    grid-template-columns: 1fr;
+  }
   .learning-resources-page {
     padding: 21px 14px;
   }
   .resources-header h1{
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .resources-header p {
@@ -679,7 +682,7 @@
   }
 
   .resource-details h3 {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .resource-meta {
@@ -691,7 +694,7 @@
     min-width: 67px;
     height: 26px;
     margin-left: 8px;
-    font-size: 7px;
+    font-size: 8px;
   }
 }
 

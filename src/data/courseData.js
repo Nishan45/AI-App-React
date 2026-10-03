@@ -104,7 +104,7 @@ export const modules = [
       ["Lecture 2: Designing Solutions", "15:40", "GHpchgLoDvI"],
       ["Lecture 3: Final Project", "18:20", "GHpchgLoDvI"],
     ],
-  }
+  },
 ];
 
 
@@ -550,7 +550,7 @@ export const studentProfile =[
     studentId:"t",
     password:"t",
     class:7,
-    moduleProgress:[5,2,1,3,2,1,3,3,3,2],
+    moduleProgress:[5,2,1,3,2,1,3,3,3,0],
     lastWatchedModule:{
       id:3,
       lesson:2

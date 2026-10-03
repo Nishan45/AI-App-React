@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { modules, moduleProgress } from "../../data/courseData";
+import { useAuth } from "../../components/contextApi";
 import "./Modules.css";
 
 const icons = [
@@ -43,15 +44,16 @@ const tones = [
 
 export default function Modules() {
   const navigate = useNavigate();
+  const {user}=useAuth();
   return (
     <div className="page modules-page">
       <div className="page-title-row">
-          <h1 className="page-title">🚀 Complete all 10 modules to master the AI course</h1>
+          <h1 className="page-title">🚀 Complete all {modules.length} modules to master the AI course</h1>
       </div>
       <div className="module-grid">
         {modules.map((m, i) => {
           const Icon = icons[i];
-          const progress = moduleProgress[i];
+          const progress =(user.moduleProgress[m.id-1]*100/m.lessons.length).toFixed(2);
           return (
             <article className={`module-card tone-${tones[i]}`} key={m.id}>
               <div className="module-number">{m.id}</div>
@@ -75,7 +77,7 @@ export default function Modules() {
                 className="module-action"
                 onClick={() => navigate(`/class-lectures?module=${m.id}`)}
               >
-                {progress === 0 ? "Start" : "View"} <ArrowRight size={11} />
+                {Number(progress)===0 ? "Start" : "View"} <ArrowRight size={11} />
               </button>
             </article>
           );

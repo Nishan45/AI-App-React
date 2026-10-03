@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ArrowRight,
   Eye,
@@ -20,7 +20,16 @@ export default function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState("");
-  const { login } = useAuth();
+  const {login } = useAuth();
+
+  useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const storedUser = localStorage.getItem('user_profile');
+        if (storedUser) {
+          navigate("/dashboard");
+        }
+      }
+    }, []);
 
   const submit = (e) => {
     e.preventDefault();

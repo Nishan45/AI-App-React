@@ -33,7 +33,7 @@ export default function Dashboard() {
       </div>
 
       <div className="stat-grid">
-        <div className="dash-stat">
+        <div className="dash-stat" onClick={() => navigate("/modules")}>
           <div className="icon-tile">
             <PlayCircle />
           </div>
@@ -72,10 +72,19 @@ export default function Dashboard() {
               <h3>Your Progress</h3>
               <p>Overall course completion</p>
             </div>
+            {/* <div className="module-progress">
+                <div className="progress-track">
+                  <div
+                    className="progress-fill"
+                    style={{ width: `${getProgressPercentage(user)}%` }}
+                  />
+                </div>
+                <span>{getProgressPercentage(user)}%</span>
+              </div> */}
             <strong>{getProgressPercentage(user)}%</strong>
           </div>
           <div className="progress-track">
-            <div className="progress-fill" style={{ width: "68%" }} />
+            <div className="progress-fill" style={{ width:`${getProgressPercentage(user)}%` }} />
           </div>
           <div className="continue-card">
             <div className="icon-tile">

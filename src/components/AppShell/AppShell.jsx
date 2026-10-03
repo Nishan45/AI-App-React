@@ -106,8 +106,8 @@ export default function AppShell() {
             {profileOpen && (
               <div className="profile-dropdown">
                 <button onClick={() => navigate("/my-progress")}>
-                  <div className="avatar small">AS</div>
-                  <span>My Profile</span>
+                  <div className="avatar small">{user.firstName[0]}{user.lastName[0]}</div>
+                  <span>My Progress</span>
                 </button>
                 <button className="logout-item" onClick={logOut}>
                   <LogOut size={14} />

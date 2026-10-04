@@ -72,15 +72,6 @@ export default function Dashboard() {
               <h3>Your Progress</h3>
               <p>Overall course completion</p>
             </div>
-            {/* <div className="module-progress">
-                <div className="progress-track">
-                  <div
-                    className="progress-fill"
-                    style={{ width: `${getProgressPercentage(user)}%` }}
-                  />
-                </div>
-                <span>{getProgressPercentage(user)}%</span>
-              </div> */}
             <strong>{getProgressPercentage(user)}%</strong>
           </div>
           <div className="progress-track">
@@ -115,7 +106,13 @@ export default function Dashboard() {
           </div>
         </section>
 
-        <section className="card distribution-card">
+        <section className="card distribution-card"
+        style={{
+            '--module-percentage':parseFloat(getModuleProgressPercentage(user)),
+            '--assignment-percentage':parseFloat(parseFloat(getModuleProgressPercentage(user))+parseFloat(getAssignmentsProgressPercentage(user))),
+            '--project-percentage':parseFloat(getModuleProgressPercentage(user))+parseFloat(getAssignmentsProgressPercentage(user))+parseFloat(getProjectsProgressPercentage(user)),
+            '--quiz-percentage':parseFloat(getModuleProgressPercentage(user))+parseFloat(getAssignmentsProgressPercentage(user))+parseFloat(getProjectsProgressPercentage(user))+parseFloat(getQuizProgressPercentage(user)),
+          }}>
           <div className="section-heading">
             <div>
               <h3>Learning Distribution</h3>
@@ -123,38 +120,33 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="donut"
-          style={{
-            '--module-percentage':getModuleProgressPercentage(user),
-            '--quiz-percentage':getQuizProgressPercentage(user),
-            '--project-percentage':getProjectsProgressPercentage(user),
-            '--assignment-percentage':getAssignmentsProgressPercentage(user)
-          }}
+          
           >
             <div className="donut-center">
-              <strong>{getProgressPercentage(user)}%</strong>
+              <strong></strong>
               <span>overall</span>
             </div>
           </div>
           <div className="legend">
             <span>
               <i className="l-blue" />
-              Modules <b>{getModuleProgressPercentage(user)}%</b>
+              Modules <b className="l-blue-modules">  </b>
             </span>
             <span>
               <i className="l-green" />
-              Assignments <b>{getAssignmentsProgressPercentage(user)}%</b>
+              Assignments <b className="l-green-assignments">  </b>
             </span>
             <span>
               <i className="l-yellow" />
-              Projects <b>{getProjectsProgressPercentage(user)}%</b>
+              Projects <b className="l-yellow-projects">  </b>
             </span>
             <span>
               <i className="l-purple" />
-              Quizzes <b>{getQuizProgressPercentage(user)}%</b>
+              Quizzes <b className="l-purple-quizzes">  </b>
             </span>
             <span>
               <i className="l-red" />
-              Pending <b>{100-getProgressPercentage(user)}%</b>
+              Pending <b className="l-red-pending">  </b>
             </span>
           </div>
         </section>

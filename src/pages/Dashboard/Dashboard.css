@@ -6,7 +6,7 @@
   align-items: center;
   gap: 7px;
 }
-.card.progress-card .progress-fill{
+.card.progress-card .progress-fill {
   background: linear-gradient(90deg, #2788fa, #0e6be5);
   animation: moduleProgress 0.9s ease-out both;
   transform-origin: left;
@@ -169,52 +169,93 @@
 .distribution-card .section-heading {
   grid-column: 1/-1;
 }
+@property --progress-value {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 0;
+}
+
+.distribution-card {
+  animation: dashboardLoadProgress 2s ease-out forwards;
+}
+
 .donut {
   width: 155px;
   height: 155px;
   margin: 8px auto;
   border-radius: 50%;
   background: conic-gradient(
-    #1979ed 0% calc(var(--module-percentage, 0) * 1%),
-    #28bc8d calc(var(--module-percentage, 0) * 1%)
-      calc((var(--module-percentage, 0) + var(--assignment-percentage, 0)) * 1%),
+    #1979ed 0%
+      calc(min(var(--module-percentage, 0), var(--progress-value, 0)) * 1%),
+    #28bc8d
+      calc(min(var(--module-percentage, 0), var(--progress-value, 0))*1%)
+      calc(min(var(--assignment-percentage, 0),var(--progress-value, 0))*1%),
     #f2b229
-      calc((var(--module-percentage, 0) + var(--assignment-percentage, 0)) * 1%)
-      calc(
-        (
-            var(--module-percentage, 0) + var(--assignment-percentage, 0) +
-              var(--project-percentage, 0)
-          ) *
-          1%
-      ),
+      calc(min(var(--assignment-percentage, 0),var(--progress-value, 0))*1%)
+      calc(min(var(--project-percentage, 0),var(--progress-value, 0))*1%),
     #8d5ce8
-      calc(
-        (
-            var(--module-percentage, 0) + var(--assignment-percentage, 0) +
-              var(--project-percentage, 0)
-          ) *
-          1%
-      )
-      calc(
-        (
-            var(--module-percentage, 0) + var(--assignment-percentage, 0) +
-              var(--project-percentage, 0) + var(--quiz-percentage, 0)
-          ) *
-          1%
-      ),
+      calc(min(var(--project-percentage, 0),var(--progress-value, 0))*1%)
+      calc(min(var(--quiz-percentage, 0),var(--progress-value, 0)) *1%),
     #ee617a
-      calc(
-        (
-            var(--module-percentage, 0) + var(--assignment-percentage, 0) +
-              var(--project-percentage, 0) + var(--quiz-percentage, 0)
-          ) *
-          1%
-      )
+      calc(min(var(--quiz-percentage, 0),var(--progress-value, 0)) *1%)
       100%
   );
-
   position: relative;
 }
+
+.donut strong{
+  counter-reset: percentage-counter var(--progress-value);
+}
+.donut strong::before{
+   content: counter(percentage-counter) "%";
+}
+
+.legend .l-blue-modules{
+  counter-reset: mod-percentage-counter min(var(--progress-value),var(--module-percentage, 0));
+}
+.legend .l-blue-modules::before{
+  width: 40px;
+   content: counter(mod-percentage-counter) "%";
+}
+
+.legend .l-green-assignments{
+  counter-reset: assign-percentage-counter calc(max(0,min(var(--progress-value), var(--assignment-percentage, 0)) - var(--module-percentage,0)));
+}
+.legend .l-green-assignments::before{
+  width: 40px;
+   content: counter(assign-percentage-counter) "%";
+}
+
+.legend .l-yellow-projects{
+  counter-reset: proj-percentage-counter calc(max(0,min(var(--progress-value), var(--project-percentage, 0)) - var(--assignment-percentage,0)));
+}
+.legend .l-yellow-projects::before{
+  width: 40px;
+   content: counter(proj-percentage-counter) "%";
+}
+
+.legend .l-purple-quizzes{
+  counter-reset: quiz-percentage-counter calc(max(0,min(var(--progress-value), var(--quiz-percentage, 0)) - var(--project-percentage,0)));
+}
+.legend .l-purple-quizzes::before{
+  width: 40px;
+   content: counter(quiz-percentage-counter) "%";
+}
+
+.legend .l-red-pending{
+  counter-reset: pend-percentage-counter calc(100 - var(--progress-value));
+}
+.legend .l-red-pending::before{
+  width: 40px;
+   content: counter(pend-percentage-counter) "%";
+}
+
+@keyframes dashboardLoadProgress {
+  to {
+    --progress-value:var(--quiz-percentage, 0);
+  }
+}
+
 .donut:after {
   content: "";
   position: absolute;

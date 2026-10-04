@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import YouTube from 'react-youtube';
 
-export default function YouTubeTracker({videoId}) {
+export default function YouTubeTracker({videoId,autoPlay}) {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const playerRef = useRef(null);
@@ -13,7 +13,7 @@ export default function YouTubeTracker({videoId}) {
     width: '100%',
     
     playerVars: {
-      autoplay: 1
+      autoplay: autoPlay
       
     },
   };
@@ -42,7 +42,7 @@ export default function YouTubeTracker({videoId}) {
         const percentage = (currentTime / totalTime) * 100;
         
         setProgress(percentage.toFixed(2));
-       // console.log(`Current Time: ${currentTime.toFixed(1)}s (${percentage.toFixed(1)}%)`);
+       console.log(`Current Time: ${currentTime.toFixed(1)}s (${percentage.toFixed(1)}%)`);
       }
     }, 1000); // Track every second
   };

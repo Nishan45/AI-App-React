@@ -1,13 +1,93 @@
 .page.lectures-page{
   position: relative;
 }
+
+@media(max-width:999px){
+  .window-video-right-panel{
+    display: none;
+  }
+  .lecture-module {
+    overflow: hidden;
+  }
+  
+  .page.lectures-page{
+    grid-template-columns: 1fr;
+    
+  }
+  .video-time-view{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+}
+@media(min-width:1000px){
+  .page.lectures-page{
+    display: grid;
+    grid-template-columns: minmax(256px,30%) 1fr;
+    height:90vh;
+    overflow: hidden;
+  }
+  .lecture-list {
+    display: grid;
+    gap: 13px;
+    margin-bottom: 30px;
+    max-width: 1050px;
+    overflow-y: auto;
+    /* height: 80vh; */
+    /* height: "100%"; */
+    &::-webkit-scrollbar {
+      display: none !important;
+    }
+    
+    /* Firefox */
+    scrollbar-width: none !important;
+    
+    /* Internet Explorer and Legacy Edge */
+    -ms-overflow-style: none !important;
+   
+  }
+  .lecture-module {
+    flex-shrink: 0;
+  }
+  .lecture-module .module-header{
+    border-radius: 15px;
+  }
+  .lecture-module.current-module:has(.lesson-list) .module-header{
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  .window-video-right-panel{
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px 24px;
+    padding-right: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .video-time-view{
+    display: none;
+  }
+  .lesson-row:hover{
+    cursor: pointer;
+    strong{
+      font-weight: bold;
+    }
+  }
+  .window-lecture.playing{
+    font-weight: bold;
+  }
+}
+
+
 .lecture-list {
   display: grid;
   gap: 13px;
   max-width: 1050px;
+  min-width: 256px;
 }
 .lecture-module {
-  overflow: hidden;
+  /* overflow: hidden; */
   transition: 0.2s ease;
 }
 .lecture-module.current-module {
@@ -72,8 +152,9 @@
   border-bottom: 1px solid #edf2f7;
 }
 .lesson-row:last-child {
-  border-bottom: 0;
+  border-bottom: none;
 }
+
 .lesson-info {
   display: flex;
   align-items: center;

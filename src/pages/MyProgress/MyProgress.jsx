@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckCircle2, Star, Target, Trophy } from "lucide-react";
+import { CheckCircle2, Star, Target, Trophy,ChartColumn } from "lucide-react";
 import "./MyProgress.css";
 import StarRating from "../../components/StarRating";
 import { useAuth } from "../../components/contextApi";
@@ -15,8 +15,8 @@ export default function MyProgress() {
     <div className="page progress-page">
       <div className="page-title-row">
         <div>
-          <h1 className="page-title">
-            📊 Track your learning, performance and achievements
+          <h1 className="page-title" style={{display:"flex",gap:"10px"}}>
+            <ChartColumn style={{borderRadius:"5px",color:"rgb(17, 98, 164)"}}/> Track your learning, performance and achievements
           </h1>
         </div>
       </div>
@@ -24,10 +24,11 @@ export default function MyProgress() {
         <div className="overall-card card">
           <div
             className="ring"
-            style={{ "--module-percentage": getProgressPercentage(user) }}
+            style={{ "--module-percentage": parseFloat(getProgressPercentage(user)) }}
           >
             <div>
-              <strong>{getProgressPercentage(user)}%</strong>
+              {/* <strong>{getProgressPercentage(user)}%</strong> */}
+              <strong></strong>
               <span>Overall Progress</span>
             </div>
           </div>

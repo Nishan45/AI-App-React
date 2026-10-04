@@ -550,7 +550,7 @@ export const studentProfile =[
     studentId:"t",
     password:"t",
     class:7,
-    moduleProgress:[5,2,1,3,2,1,3,3,3,0],
+    moduleProgress:[4,2,1,3,2,1,3,3,3,0],
     lastWatchedModule:{
       id:3,
       lesson:2

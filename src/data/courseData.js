@@ -5,7 +5,7 @@ export const modules = [
     desc: "Understand what AI is and how it works.",
     lessons: [
       ["Lecture 1: What is AI?", "12:45", "GHpchgLoDvI"],
-      ["Lecture 2: AI Around Us", "13:20", "GHpchgLoDvI"],
+      ["Lecture 2: AI Around Us", "13:20", "K9gH7hBAdpo"],
       ["Lecture 3: How AI Learns", "14:10", "GHpchgLoDvI"],
       ["Lecture 4: AI Ethics", "11:20", "GHpchgLoDvI"],
       ["Lecture 5: Recap & Q&A", "10:15", "GHpchgLoDvI"],

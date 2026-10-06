@@ -136,7 +136,9 @@ export default function AILearningBuddy() {
             className="chat-input"
             onSubmit={(e) => {
               e.preventDefault();
-              send();
+              if(!thinking){
+                send();
+              }
             }}
           >
             <input
@@ -144,7 +146,8 @@ export default function AILearningBuddy() {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your question here..."
             />
-            <button type="submit">
+            <button type="submit"
+            className={`submit ${thinking?"thinking":"not-thinking"}`}>
               Send <Send size={12} />
             </button>
           </form>

@@ -1,12 +1,15 @@
-
+.buddy-page{
+  padding: 10px !important;
+}
 .buddy-grid {
   display: grid;
-  grid-template-columns: 1.8fr 1fr;
-  gap: 16px;
+  grid-template-columns: 75% 1fr;
+  gap: 10px;
+  height: 100%;
 }
 .chat-card {
   padding: 20px;
-  height: calc(100vh - 185px);
+  height: calc(100vh - 64px - 20px);
   /* min-height: 520px; */
   /* height: 70vh; */
   display: flex;
@@ -17,34 +20,35 @@
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 25px;
   padding: 14px;
+  padding-left: 20px;
   border: 1px solid #e1ecf7;
   background: linear-gradient(135deg, #f5fbff, #edf7ff);
   border-radius: 13px;
 }
 .chat-hero strong {
-  font-size: 12px;
+  font-size: 14px;
   color: #153962;
 }
 .chat-hero p {
-  font-size: 9px;
+  font-size: 14px;
   color: #778ba3;
   margin: 5px 0 0;
   line-height: 1.5;
 }
 .thinking-bot {
   position: relative;
-  width: 65px;
-  height: 65px;
+  width: 30px;
+  height: 30px;
   flex: 0 0 auto;
-  border-radius: 20px;
+  border-radius: 15px;
   background: linear-gradient(145deg, #fff, #bde5ff);
   display: grid;
   place-items: center;
   color: #075ab9;
   font-size: 22px;
-  box-shadow: 0 10px 20px rgba(33, 117, 190, 0.15);
+  /* box-shadow: 0 10px 20px rgba(33, 117, 190, 0.15); */
 }
 .thinking-bot:before {
   content: "";
@@ -69,7 +73,7 @@
   display: flex;
   gap: 7px;
   flex-wrap: wrap;
-  margin: 14px 0;
+  margin: 10px 0;
 }
 .suggestions button {
   display: flex;
@@ -80,7 +84,7 @@
   border-radius: 999px;
   background: #fff;
   color: #24608e;
-  font-size: 9px;
+  font-size: 14px;
 }
 .messages {
   flex: 1;
@@ -107,12 +111,13 @@
 .message {
   display: flex;
   gap: 8px;
-  max-width: 78%;
-  font-size: 10px;
+  /* max-width: 85%; */
+  font-size: 14px;
   line-height: 1.5;
   color: #385574;
+  
 }
-.message.bot {
+.message.assistant {
   align-self: flex-start;
 }
 .message.user {
@@ -120,13 +125,16 @@
   flex-direction: row-reverse;
 }
 .message > div:last-child {
-  padding: 10px 12px;
+  padding: 0 12px;
   border-radius: 11px;
   background: #f2f7fc;
+  border: 1px solid #dfe9f2;
+  box-shadow: 0 2px 5px rgba(24, 63, 100, 0.07);
 }
 .message.user > div:last-child {
   color: #fff;
   background: #1575e5;
+  
 }
 .message-icon {
   width: 27px;
@@ -153,7 +161,7 @@
   border-radius: 8px;
   padding: 0 12px;
   outline: 0;
-  font-size: 10px;
+  font-size: 14px;
 }
 .chat-input button {
   border: 0;
@@ -161,7 +169,7 @@
   padding: 0 13px;
   color: #fff;
   background: #1677ed;
-  font-size: 9px;
+  font-size: 14px;
   font-weight: 700;
   display: flex;
   gap: 5px;
@@ -169,6 +177,7 @@
 }
 .buddy-side {
   padding: 20px;
+  font-size: 14px;
   height: max-content;
 }
 .side-title {
@@ -184,11 +193,11 @@
   display: block;
 }
 .side-title strong {
-  font-size: 11px;
+  font-size: 12px;
   color: #25486d;
 }
 .side-title span {
-  font-size: 8px;
+  font-size: 12px;
   color: #8999ad;
   margin-top: 3px;
 }
@@ -199,7 +208,7 @@
 .buddy-side li {
   padding: 9px 0;
   border-bottom: 1px solid #edf2f7;
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.45;
 }
 .buddy-tip {
@@ -210,7 +219,7 @@
   border-radius: 8px;
   background: #f4f9ff;
   color: #69819c;
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.5;
 }
 .buddy-tip svg {
@@ -228,5 +237,78 @@
   }
   .buddy-side {
     display: none;
+  }
+}
+@media(max-width:650px){
+  .chat-hero strong {
+    font-size: 12px;
+    color: #153962;
+  }
+  .chat-hero p {
+    font-size: 12px;
+    color: #778ba3;
+    margin: 5px 0 0;
+    line-height: 1.5;
+  }
+  .suggestions button {
+    font-size: 12px;
+  }
+  .message {
+    font-size: 12px;
+  }
+  .chat-input input {
+    font-size: 12px;
+  }
+  .chat-input button {
+    font-size: 12px;
+  }
+}
+@media(max-width:1100px){
+  .buddy-grid {
+    grid-template-columns: 1fr;
+  }
+  .buddy-side {
+    display: none;
+  }
+}
+
+.thinking-bubble {
+  background-color: #f0f4f9;
+  padding: 12px 18px;
+  border-radius: 18px 18px 18px 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 80%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Animated Dots */
+.dot {
+  width: 4px;
+  height: 4px;
+  background-color: #5f6368;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounceDot 1.4s infinite ease-in-out both;
+}
+
+/* Sequencing the Dot Animations */
+.dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+/* Bouncing Dots Animation */
+@keyframes bounceDot {
+  0%, 80%, 100% { 
+    transform: scale(0);
+    opacity: 0.4;
+  } 
+  40% { 
+    transform: scale(1.0);
+    opacity: 1;
   }
 }

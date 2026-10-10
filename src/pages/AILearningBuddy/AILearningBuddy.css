@@ -430,109 +430,11 @@
   }
 
   .suggestions {
-    flex:none;
-    display: flex;
-    
-    flex-direction: row;
-    gap: 7px;
-    /* overflow-x: auto; */
-    padding:0;
-    flex-wrap: nowrap;
-    /* Hides scrollbars while keeping it scrollable */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-    scroll-behavior: smooth;
     margin: 0;
     margin-bottom: 10px;
     margin-top: 5px;
   }
-  .message-icon{
-    display: none;
-  }
 
-  .suggestions .thinking-bot{
-    /* padding: 10px; */
-    display: grid;
-    margin-left: 5px;
-    margin-right: 10px;
-    scale: calc(0.8);
-  }
-  .messages{
-    margin-top: 0;
-    padding: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-    /* overflow-x: auto; */
-  }
-  .message.assistant > div:last-child{
-    border-top-left-radius: 0 !important;
-  }
-  .message.user > div:last-child{
-    border-top-right-radius: 0 !important;
-  }
-  .thinking-bubble{
-    padding:12px !important;
-    max-width: 100% !important;
-  }
-  .message{
-    position: relative; 
-    
-  }
-  .message.assistant::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -5px; /* Pushes the pointer slightly outside the bubble */
-    width: 0;
-    height: 0;
-    border-top: 0px solid transparent;
-    border-bottom: 12px solid transparent;
-    
-    /* Inherit the background color dynamically from the parent message bubble */
-    border-right: 6px solid #dfe9f2;
-    /* #dfe9f2
-    #f2f7fc */
-  }
-  .message.assistant::after {
-    content: "";
-    position: absolute;
-    top: 1px;          /* Aligns perfectly with the inner top edge */
-    left: -4px;      /* Sits right inside the outer border triangle */
-    width: 0;
-    height: 0;
-    border-top: 0px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-right: 6px solid #f2f7fc;
-    z-index: 2;      /* Sits on top of the border triangle */
-  }
-
-  .message.user::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: -5px; /* Pushes the pointer slightly outside the bubble */
-    width: 0;
-    height: 0;
-    border-top: 0px solid transparent;
-    border-bottom: 12px solid transparent;
-    
-    /* Inherit the background color dynamically from the parent message bubble */
-    border-left: 6px solid #dfe9f2;
-    /* #dfe9f2
-    #f2f7fc */
-  }
-  .message.user::after {
-    content: "";
-    position: absolute;
-    top: 1px;          /* Aligns perfectly with the inner top edge */
-    right: -4px;      /* Sits right inside the outer border triangle */
-    width: 0;
-    height: 0;
-    border-top: 0px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-left: 6px solid #1575e5;
-    z-index: 2;      /* Sits on top of the border triangle */
-  }
   .chat-card{
     padding: 5px !important;
   }
@@ -569,12 +471,14 @@
     margin: 5px 0 0;
     line-height: 1.5;
   }
+  
   .suggestions button {
     font-size: 12px;
   }
   .message {
     font-size: 12px;
   }
+  
   .chat-input input {
     font-size: 12px;
   }

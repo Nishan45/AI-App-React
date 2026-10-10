@@ -31,6 +31,30 @@ export default function AILearningBuddy() {
 
   const [input, setInput] = React.useState("");
   const messagesRef = React.useRef(null);
+  React.useEffect(() => {
+    if (!window.visualViewport) return;
+
+    const handleVisualResize = () => {
+      // Calculate how much space the keyboard is occupying at the bottom
+      const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
+      
+      // Update offset (safeguard against negative values on bounce)
+      
+      const inputForm = document.querySelector('.chat-input');
+      if (inputForm) {
+        inputForm.style.paddingBottom = `${offset}px`;
+      }
+    };
+
+
+    window.visualViewport.addEventListener('resize', handleVisualResize);
+    window.visualViewport.addEventListener('scroll', handleVisualResize);
+
+    return () => {
+      window.visualViewport.removeEventListener('resize', handleVisualResize);
+      window.visualViewport.removeEventListener('scroll', handleVisualResize);
+    };
+  }, []);
 
   React.useEffect(() => {
     const el = messagesRef.current;
@@ -179,10 +203,17 @@ export default function AILearningBuddy() {
           </div>
           <form
             className="chat-input"
+
             onSubmit={(e) => {
+
               e.preventDefault();
+              
               if (!thinking) {
                 send();
+                const textarea = e.currentTarget.querySelector('textarea');
+                if (textarea) {
+                  textarea.style.height = "auto";
+                }
               }
             }}
           >
@@ -194,14 +225,17 @@ export default function AILearningBuddy() {
             <textarea
             name="text"
             id="chat-input-text"
+            
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onInput={(e) => {
+                
                 // 1. Reset height to auto so it can shrink if text is deleted
                 e.currentTarget.style.height = "auto";
                 // 2. Set height to match the scroll height of the typed text
                 e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
               }}
+              
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault(); // Prevents adding a newline on submit

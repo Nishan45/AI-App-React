@@ -31,6 +31,10 @@ export default function AILearningBuddy() {
 
   const [input, setInput] = React.useState("");
   const messagesRef = React.useRef(null);
+  const suggestRef = React.useRef(null);
+  const lastScrollTop = React.useRef(0);
+  const currentTranslateY = React.useRef(0);
+
   React.useEffect(() => {
     if (!window.visualViewport) return;
 
@@ -108,6 +112,36 @@ export default function AILearningBuddy() {
     setThinking(false);
   };
 
+  const handleScroll = () => {
+    const isMobile = window.innerWidth < 650;
+    if(!isMobile) return;
+    if (!messagesRef.current || !suggestRef.current) return;
+
+    const currentScrollTop = messagesRef.current.scrollTop;
+    
+    // Calculate the difference in scroll
+    const deltaY = currentScrollTop - lastScrollTop.current;
+    
+    
+    // Update the position (scrolling down pushes suggestions up, scrolling up brings them down)
+    currentTranslateY.current -= deltaY;
+    
+    
+    //console.log(deltaY)
+    if(deltaY<0){
+      suggestRef.current.classList.add("hidden");
+      currentTranslateY.current =0;
+    }
+    
+    else{
+      suggestRef.current.classList.remove("hidden");
+      suggestRef.current.style.transform = `translateY(${currentTranslateY.current}px)`;
+    }
+    
+    // Save the current scroll position for the next event
+    lastScrollTop.current = currentScrollTop;
+    
+  };
   return (
     <div className="page buddy-page">
       {/* <div className="page-title-row">
@@ -139,7 +173,8 @@ export default function AILearningBuddy() {
               </p> */}
             </div>
           </div>
-          <div className="suggestions">
+          <div className="suggestions-scroll-wrapper">
+          <div className="suggestions" ref={suggestRef}>
             <div className="thinking-bot">
               <span>
                 <Bot size={20} />
@@ -169,7 +204,12 @@ export default function AILearningBuddy() {
               ))}
             </div>
           </div>
-          <div className="messages" ref={messagesRef}>
+          </div>
+          <div className="messages"
+          
+           ref={messagesRef}
+           onScroll={handleScroll}
+           >
             {messages.map((m, i) => (
               <div key={i} className={`message ${m.role}`}>
                 <div className="message-icon">

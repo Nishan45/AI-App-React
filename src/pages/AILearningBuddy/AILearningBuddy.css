@@ -7,6 +7,7 @@
   gap: 10px;
   height: 100%;
 }
+
 .chat-card {
   padding: 20px;
   height: calc(100dvh - 64px - 20px);
@@ -419,6 +420,39 @@
   }
 
 @media(max-width:650px){
+  .suggestions-scroll-wrapper {
+    position: absolute;
+    top: 68px;
+    left: 5px;
+    right: 5px;
+    height: 45px;      /* The exact height of your suggestions row */
+    overflow-x: auto;
+    overflow-y: hidden;
+    z-index: 10;
+    
+ 
+  }
+  .messages{
+    padding-top: 45px;
+  }
+  .suggestions{
+    /* position: absolute;
+    top: 64px;
+    left:5px; */
+    z-index: 10;
+     padding-top: 5px;
+    padding-bottom: 10px;
+    background: white;
+    
+  }
+  
+  .suggestions.hidden{
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    transform: translateY(0) !important; /* Default state: fully visible */
+    transition: transform 0.5s ease-in-out; 
+  }
   .page.buddy-page{
     padding:0 !important;
   }

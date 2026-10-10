@@ -6,6 +6,8 @@
   grid-template-columns: min(75%,900px) 1fr;
   gap: 10px;
   height: 100%;
+  
+  overflow: hidden;
 }
 
 .chat-card {
@@ -436,9 +438,6 @@
     padding-top: 45px;
   }
   .suggestions{
-    /* position: absolute;
-    top: 64px;
-    left:5px; */
     z-index: 10;
      padding-top: 5px;
     padding-bottom: 10px;
@@ -463,12 +462,7 @@
     width: 50px;
   }
 
-  .suggestions {
-    margin: 0;
-    margin-bottom: 10px;
-    margin-top: 5px;
-  }
-
+  
   .chat-card{
     padding: 5px !important;
   }

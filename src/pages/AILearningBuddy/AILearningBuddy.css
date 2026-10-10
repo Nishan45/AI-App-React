@@ -3,7 +3,7 @@
 }
 .buddy-grid {
   display: grid;
-  grid-template-columns: 75% 1fr;
+  grid-template-columns: min(75%,900px) 1fr;
   gap: 10px;
   height: 100%;
 }
@@ -119,7 +119,10 @@
 }
 .message.assistant {
   align-self: flex-start;
+  white-space: "pre-wrap";
+  margin-bottom: "15px",
 }
+
 .message.user {
   align-self: flex-end;
   flex-direction: row-reverse;
@@ -163,10 +166,45 @@
   outline: 0;
   font-size: 14px;
 }
+.chat-input textarea {
+  flex: 1;     
+  resize: none;     
+  overflow-y: auto;     
+  min-height: 40px;       
+  max-height: 200px;      
+  border: 1px solid #dbe8f5;
+  border-radius: 8px;
+  padding:12px;
+  outline: 0;
+  font-size: 14px; 
+
+   &::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  /* Firefox */
+  scrollbar-width: none !important;
+  
+  /* Internet Explorer and Legacy Edge */
+  -ms-overflow-style: none !important;
+
+}
+.chat-input-button-box{
+  position: relative;
+  width: 90px;
+  
+  
+}
 .chat-input button {
+  position: absolute;
+  bottom: 0.8px;
+  height: 41.6px;
   border: 0;
+  width: 100%;
+  justify-content: center;
   border-radius: 8px;
   padding: 0 13px;
+  
   color: #fff;
   background: #1677ed;
   font-size: 14px;
@@ -242,7 +280,285 @@
     display: none;
   }
 }
+.suggestions .thinking-bot{
+  display: none;
+}
+.suggestion-box{
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 7px;
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  /* Firefox */
+  scrollbar-width: none !important;
+  
+  /* Internet Explorer and Legacy Edge */
+  -ms-overflow-style: none !important;
+}
+.chat-hero{
+  display: none;
+}
+
+.suggestions {
+    flex:none;
+    display: flex;
+    
+    flex-direction: row;
+    gap: 7px;
+    /* overflow-x: auto; */
+    padding:0;
+    flex-wrap: nowrap;
+    /* Hides scrollbars while keeping it scrollable */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    scroll-behavior: smooth;
+    margin: 0;
+    margin-bottom: 10px;
+    /* margin-top: 5px; */
+  }
+  .message-icon{
+    display: none;
+  }
+
+  .suggestions .thinking-bot{
+    /* padding: 10px; */
+    display: grid;
+    margin-left: 5px;
+    margin-right: 10px;
+    scale: calc(0.8);
+  }
+  .messages{
+    margin-top: 0;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    /* overflow-x: auto; */
+  }
+  .message.assistant > div:last-child{
+    border-top-left-radius: 0 !important;
+  }
+  .message.user > div:last-child{
+    border-top-right-radius: 0 !important;
+  }
+  .thinking-bubble{
+    padding:12px !important;
+    max-width: 100% !important;
+  }
+  .message{
+    position: relative; 
+    
+  }
+  .message.assistant::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -5px; /* Pushes the pointer slightly outside the bubble */
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 12px solid transparent;
+    
+    /* Inherit the background color dynamically from the parent message bubble */
+    border-right: 6px solid #dfe9f2;
+    /* #dfe9f2
+    #f2f7fc */
+  }
+  .message.assistant::after {
+    content: "";
+    position: absolute;
+    top: 1px;          /* Aligns perfectly with the inner top edge */
+    left: -4px;      /* Sits right inside the outer border triangle */
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 6px solid #f2f7fc;
+    z-index: 2;      /* Sits on top of the border triangle */
+  }
+
+  .message.user::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -5px; /* Pushes the pointer slightly outside the bubble */
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 12px solid transparent;
+    
+    /* Inherit the background color dynamically from the parent message bubble */
+    border-left: 6px solid #dfe9f2;
+    /* #dfe9f2
+    #f2f7fc */
+  }
+  .message.user::after {
+    content: "";
+    position: absolute;
+    top: 1px;          /* Aligns perfectly with the inner top edge */
+    right: -4px;      /* Sits right inside the outer border triangle */
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 6px solid #1575e5;
+    z-index: 2;      /* Sits on top of the border triangle */
+  }
+  .chat-card{
+    padding: 10px !important;
+  }
+
+  .suggestions::-webkit-scrollbar {
+    display: none;
+  }
+  .suggestions button {
+    
+    white-space: nowrap;
+  }
+
 @media(max-width:650px){
+  .page.buddy-page{
+    padding:0 !important;
+  }
+  .chat-input-button-box button span{
+    display: none;
+  }
+  .chat-input-button-box{
+    width: 50px;
+  }
+
+  .suggestions {
+    flex:none;
+    display: flex;
+    
+    flex-direction: row;
+    gap: 7px;
+    /* overflow-x: auto; */
+    padding:0;
+    flex-wrap: nowrap;
+    /* Hides scrollbars while keeping it scrollable */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    scroll-behavior: smooth;
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  .message-icon{
+    display: none;
+  }
+
+  .suggestions .thinking-bot{
+    /* padding: 10px; */
+    display: grid;
+    margin-left: 5px;
+    margin-right: 10px;
+    scale: calc(0.8);
+  }
+  .messages{
+    margin-top: 0;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    /* overflow-x: auto; */
+  }
+  .message.assistant > div:last-child{
+    border-top-left-radius: 0 !important;
+  }
+  .message.user > div:last-child{
+    border-top-right-radius: 0 !important;
+  }
+  .thinking-bubble{
+    padding:12px !important;
+    max-width: 100% !important;
+  }
+  .message{
+    position: relative; 
+    
+  }
+  .message.assistant::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -5px; /* Pushes the pointer slightly outside the bubble */
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 12px solid transparent;
+    
+    /* Inherit the background color dynamically from the parent message bubble */
+    border-right: 6px solid #dfe9f2;
+    /* #dfe9f2
+    #f2f7fc */
+  }
+  .message.assistant::after {
+    content: "";
+    position: absolute;
+    top: 1px;          /* Aligns perfectly with the inner top edge */
+    left: -4px;      /* Sits right inside the outer border triangle */
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 6px solid #f2f7fc;
+    z-index: 2;      /* Sits on top of the border triangle */
+  }
+
+  .message.user::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -5px; /* Pushes the pointer slightly outside the bubble */
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 12px solid transparent;
+    
+    /* Inherit the background color dynamically from the parent message bubble */
+    border-left: 6px solid #dfe9f2;
+    /* #dfe9f2
+    #f2f7fc */
+  }
+  .message.user::after {
+    content: "";
+    position: absolute;
+    top: 1px;          /* Aligns perfectly with the inner top edge */
+    right: -4px;      /* Sits right inside the outer border triangle */
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 6px solid #1575e5;
+    z-index: 2;      /* Sits on top of the border triangle */
+  }
+  .chat-card{
+    padding: 5px !important;
+  }
+
+  .suggestions::-webkit-scrollbar {
+    display: none;
+  }
+  .suggestions button {
+    
+    white-space: nowrap;
+  }
+  
+  .chat-card {
+    padding: 10px;
+    height: calc(100dvh - 64px);
+    /* min-height: 520px; */
+    /* height: 70vh; */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+  .chat-hero{
+    display: none;
+  }
   .chat-hero strong {
     font-size: 12px;
     color: #153962;

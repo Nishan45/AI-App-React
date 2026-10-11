@@ -66,11 +66,13 @@ export default function AILearningBuddy() {
         if (!isFocusedOnInput) {
           // If the user isn't focused on the text area, force the layout back down to baseline
           setKeyboardOffset(5);
+          document.body.classList.remove("keyboard-lock");
         } else {
           // SAFEGUARD: If a real keyboard is up, track it. 
           // Lowering the threshold to 60px catches the keyboard frame even if the 
           // browser header is mid-collapse and stealing layout pixels.
           setKeyboardOffset(offset);
+          document.body.classList.add("keyboard-lock");
         }
       };
 
@@ -110,10 +112,18 @@ export default function AILearningBuddy() {
 
   React.useEffect(() => {
       if(messages.length<=1) return;
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: "smooth"
-      });
+
+      const isMobile = window.innerWidth < 650;
+      if(!isMobile){
+        const el = messagesRef.current;
+        if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      }
+      else{
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth"
+        });
+      }
 
     
   }, [messages]);
@@ -276,7 +286,7 @@ export default function AILearningBuddy() {
           </div>
           </div>
           <div className="messages"
-          
+          ref={messagesRef}
            
            >
             {messages.map((m, i) => (

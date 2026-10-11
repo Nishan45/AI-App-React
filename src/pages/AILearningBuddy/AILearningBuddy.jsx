@@ -59,24 +59,27 @@ export default function AILearningBuddy() {
       //   setKeyboardOffset(offset);
         
       // }
+      const app_shell=document.querySelector(".app-shell");
       const updateOffset = () => {
          
         // Calculate how much layout space the keyboard is occupying at the bottom
         let offset = Math.max(5,window.innerHeight - window.visualViewport.height);
         if(offset<=10){
           setKeyboardOffset(5);
-          
+          app_shell.style.overflow="auto";
         }
         if (!isFocusedOnInput) {
           // If the user isn't focused on the text area, force the layout back down to baseline
           setKeyboardOffset(5);
-          
+          app_shell.style.overflow="auto";
           
         } else {
           // SAFEGUARD: If a real keyboard is up, track it. 
           // Lowering the threshold to 60px catches the keyboard frame even if the 
           // browser header is mid-collapse and stealing layout pixels.
-          setKeyboardOffset(offset);
+          //setKeyboardOffset(offset);
+          app_shell.style.overflow="hidden";
+
           
         }
       };

@@ -5,6 +5,10 @@
   height: 100dvh !important;
   min-height: 0;
   /* overflow: hidden; */
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  
 }
 .sidebar {
   position: fixed;

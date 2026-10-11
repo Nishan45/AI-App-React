@@ -46,14 +46,19 @@ export default function AILearningBuddy() {
         activeEl.tagName === 'TEXTAREA' || 
         activeEl.isContentEditable
       );
+
+      let offset = Math.max(5,window.innerHeight - window.visualViewport.height);
+
       if(!isFocusedOnInput){
+
         if(!thinking){
           return;
         }
+        offset=5;
       }
 
       // Calculate how much space the keyboard is occupying at the bottom
-      const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
+      // const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
       // if(offset<50) return;
       // Update offset (safeguard against negative values on bounce)
       

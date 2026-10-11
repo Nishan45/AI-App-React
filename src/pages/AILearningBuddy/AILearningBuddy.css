@@ -437,7 +437,7 @@
     top: 64px;
     left: 5px;
     right: 5px;
-    height: 50px;     
+    height: 42px;     
     overflow-x: auto;
     /* overflow-y: hidden; */
     z-index: 10;
@@ -462,6 +462,7 @@
 }
   .messages{
     padding-top: 31px;
+    min-height: calc(100dvh - 64px - 64px);
   }
   .suggestions{
     z-index: 10;
@@ -499,7 +500,7 @@
   
   .chat-card {
     padding: 5px;
-    /* height: calc(100dvh - 64px); */
+    
     height: auto;
     /* min-height: 520px; */
     /* height: 70vh; */
@@ -508,7 +509,7 @@
     /* overflow: hidden; */
     border-radius: 0 !important;
     border: none !important;
-    margin-bottom: 40px;
+    margin-bottom: 45px;
   }
   .chat-hero{
     display: none;

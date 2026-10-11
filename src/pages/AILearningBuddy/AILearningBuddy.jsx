@@ -62,7 +62,10 @@ export default function AILearningBuddy() {
       const updateOffset = () => {
         // Calculate how much layout space the keyboard is occupying at the bottom
         let offset = Math.max(5,window.innerHeight - window.visualViewport.height);
-
+        if(offset<=10){
+          setKeyboardOffset(5);
+          document.body.classList.remove("keyboard-lock");
+        }
         if (!isFocusedOnInput) {
           // If the user isn't focused on the text area, force the layout back down to baseline
           setKeyboardOffset(5);

@@ -33,7 +33,7 @@ export default function AILearningBuddy() {
   const messagesRef = React.useRef(null);
   const suggestRef = React.useRef(null);
   const lastScrollTop = React.useRef(0);
-  
+  const [keyboardOffset, setKeyboardOffset] = React.useState(5);
 
   React.useEffect(() => {
     if (!window.visualViewport) return;
@@ -50,23 +50,21 @@ export default function AILearningBuddy() {
       let offset = Math.max(5,window.innerHeight - window.visualViewport.height);
 
       if(!isFocusedOnInput){
-
-        if(!thinking){
-          return;
-        }
-        offset=5;
+        setKeyboardOffset(5);
       }
-
+      else{
+        setKeyboardOffset(offset);
+      }
       // Calculate how much space the keyboard is occupying at the bottom
       // const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
       // if(offset<50) return;
       // Update offset (safeguard against negative values on bounce)
-      
-      const inputForm = document.querySelector('.chat-input');
-      if (inputForm) {
-        inputForm.style.paddingBottom = `${offset}px`;
+
+      // const inputForm = document.querySelector('.chat-input');
+      // if (inputForm) {
+      //   inputForm.style.paddingBottom = `${offset}px`;
        
-      }
+      // }
     };
 
     window.visualViewport.addEventListener('resize', handleVisualResize);
@@ -286,7 +284,7 @@ export default function AILearningBuddy() {
           </div>
           <form
             className="chat-input"
-
+            style={{ paddingBottom: `${keyboardOffset}px` }}
             onSubmit={(e) => {
 
               e.preventDefault();

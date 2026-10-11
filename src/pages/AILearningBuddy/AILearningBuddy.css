@@ -7,7 +7,7 @@
   display: grid;
   grid-template-columns: min(75%,900px) 1fr;
   gap: 10px;
-  height: 100%;
+  height: 100dvh;
   
   overflow: hidden;
 }
@@ -16,7 +16,9 @@
   display: grid;
   grid-template-columns: min(75%,900px) 1fr;
   gap: 10px;
-  height: 100%;
+  /* height: calc(100dvh - 64px - 64px); */
+  /* height: 100dvh; */
+  
 }
 
 .chat-card {

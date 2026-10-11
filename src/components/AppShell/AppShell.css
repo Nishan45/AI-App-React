@@ -7,7 +7,7 @@
   /* overflow: hidden; */
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  
   
 }
 .sidebar {

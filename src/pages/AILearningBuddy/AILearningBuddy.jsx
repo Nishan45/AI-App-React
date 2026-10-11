@@ -2,6 +2,7 @@ import React from "react";
 import {
   Bot,
   Brain,
+  Calculator,
   HelpCircle,
   Send,
   Sparkles,
@@ -34,6 +35,7 @@ export default function AILearningBuddy() {
   const suggestRef = React.useRef(null);
   const lastScrollTop = React.useRef(0);
   const [keyboardOffset, setKeyboardOffset] = React.useState(5);
+  const [pageHeight, setPageHeight] = React.useState("100dvh");
 
   React.useEffect(() => {
     if (!window.visualViewport) return;
@@ -51,9 +53,11 @@ export default function AILearningBuddy() {
 
       if(!isFocusedOnInput){
         setKeyboardOffset(5);
+        setPageHeight(`100dvh`);
       }
       else{
-        setKeyboardOffset(offset);
+        //setKeyboardOffset(offset);
+        setPageHeight(`${window.visualViewport.height}px`);
       }
       // Calculate how much space the keyboard is occupying at the bottom
       // const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
@@ -149,6 +153,7 @@ export default function AILearningBuddy() {
   };
 
   const [scrollOffset, setScrollOffset] = React.useState(0);
+  
 
   React.useEffect(() => {
     const isMobile = window.innerWidth < 650;
@@ -183,6 +188,7 @@ export default function AILearningBuddy() {
 
   return (
     <div className="page buddy-page"
+    style={{ height:  `calc(${pageHeight} - 64px - 64px)` }}
     >
       {/* <div className="page-title-row">
         <div>

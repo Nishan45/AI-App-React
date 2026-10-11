@@ -33,7 +33,7 @@ export default function AILearningBuddy() {
   const messagesRef = React.useRef(null);
   const suggestRef = React.useRef(null);
   const lastScrollTop = React.useRef(0);
-  const currentTranslateY = React.useRef(0);
+  
 
   React.useEffect(() => {
     if (!window.visualViewport) return;
@@ -41,7 +41,7 @@ export default function AILearningBuddy() {
     const handleVisualResize = () => {
       // Calculate how much space the keyboard is occupying at the bottom
       const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
-      
+      if(offset<150) return;
       // Update offset (safeguard against negative values on bounce)
       
       const inputForm = document.querySelector('.chat-input');
@@ -49,7 +49,6 @@ export default function AILearningBuddy() {
         inputForm.style.paddingBottom = `${offset}px`;
       }
     };
-
 
     window.visualViewport.addEventListener('resize', handleVisualResize);
     window.visualViewport.addEventListener('scroll', handleVisualResize);
@@ -60,9 +59,18 @@ export default function AILearningBuddy() {
     };
   }, []);
 
+  // React.useEffect(() => {
+  //   const el = messagesRef.current;
+  //   if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+  // }, [messages]);
+
   React.useEffect(() => {
-    const el = messagesRef.current;
-    if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth"
+      });
+    
   }, [messages]);
 
   const send = async () => {
@@ -112,36 +120,6 @@ export default function AILearningBuddy() {
     setThinking(false);
   };
 
-  // const handleScroll = () => {
-  //   const isMobile = window.innerWidth < 650;
-  //   if(!isMobile) return;
-  //   if (!messagesRef.current || !suggestRef.current) return;
-  //   console.log("ok")
-  //   const currentScrollTop = messagesRef.current.scrollTop;
-    
-  //   // Calculate the difference in scroll
-  //   const deltaY = currentScrollTop - lastScrollTop.current;
-    
-    
-  //   // Update the position (scrolling down pushes suggestions up, scrolling up brings them down)
-  //   currentTranslateY.current -= deltaY;
-    
-    
-  //   //console.log(deltaY)
-  //   if(deltaY<0){
-  //     suggestRef.current.classList.add("hidden");
-  //     currentTranslateY.current =0;
-  //   }
-    
-  //   else{
-  //     suggestRef.current.classList.remove("hidden");
-  //     suggestRef.current.style.transform = `translateY(${currentTranslateY.current}px)`;
-  //   }
-    
-  //   // Save the current scroll position for the next event
-  //   lastScrollTop.current = currentScrollTop;
-    
-  // };
   const [scrollOffset, setScrollOffset] = React.useState(0);
 
   React.useEffect(() => {

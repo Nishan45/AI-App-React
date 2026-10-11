@@ -3,12 +3,19 @@ import ReactMarkdown from 'react-markdown';
 
 export default function TypingMessage({ text="", speed = 10,messagesRef }) {
   const [displayedText, setDisplayedText] = useState("");
+  useEffect(() => {
+      
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth"
+        });
+      
+    }, [displayedText]);
 
   useEffect(() => {
     // Reset the text if the prompt/text changes
     setDisplayedText(""); 
     let index = -1;
-
     
     
     // Create an interval loop to add characters one by one

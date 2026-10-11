@@ -47,7 +47,7 @@ export default function AILearningBuddy() {
         activeEl.isContentEditable
       );
       if(!isFocusedOnInput) return;
-      
+
       // Calculate how much space the keyboard is occupying at the bottom
       const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
       // if(offset<50) return;
@@ -74,7 +74,7 @@ export default function AILearningBuddy() {
   // }, [messages]);
 
   React.useEffect(() => {
-      
+      if(messages.length<=1) return;
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: "smooth"

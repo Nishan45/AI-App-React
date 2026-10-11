@@ -81,8 +81,6 @@ export default function AILearningBuddy() {
         }
       };
 
-      updateOffset();
-
       // 3. Request the very next browser animation frame to double-check the calculations
       // right after the mobile browser header settles its snap transition
       requestAnimationFrame(() => {

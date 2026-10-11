@@ -87,7 +87,7 @@ export default function AILearningBuddy() {
       // 3. Request the very next browser animation frame to double-check the calculations
       // right after the mobile browser header settles its snap transition
       requestAnimationFrame(() => {
-        updateOffset();
+        //updateOffset();
       });
 
       // Calculate how much space the keyboard is occupying at the bottom
@@ -225,6 +225,36 @@ export default function AILearningBuddy() {
     };
   }, []);
 
+  React.useEffect(() => {
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+
+    const updateViewport = () => {
+      const height = viewport.height;
+      const top = viewport.offsetTop;
+
+      document.documentElement.style.setProperty(
+        "--app-height",
+        `${height}px`
+      );
+
+      document.documentElement.style.setProperty(
+        "--app-top",
+        `${top}px`
+      );
+    };
+
+    updateViewport();
+
+    viewport.addEventListener("resize", updateViewport);
+    viewport.addEventListener("scroll", updateViewport);
+
+    return () => {
+      viewport.removeEventListener("resize", updateViewport);
+      viewport.removeEventListener("scroll", updateViewport);
+    };
+  }, []);
+
   return (
     <div className="page buddy-page"
     >
@@ -356,6 +386,7 @@ export default function AILearningBuddy() {
               onInput={(e) => {
                 setScrollOffset(0);
                 // 1. Reset height to auto so it can shrink if text is deleted
+                
                 e.currentTarget.style.height = "auto";
                 // 2. Set height to match the scroll height of the typed text
                 e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;

@@ -64,18 +64,17 @@ export default function AILearningBuddy() {
         let offset = Math.max(5,window.innerHeight - window.visualViewport.height);
         if(offset<=10){
           setKeyboardOffset(5);
-          document.body.classList.remove("keyboard-lock");
+          
         }
         if (!isFocusedOnInput) {
           // If the user isn't focused on the text area, force the layout back down to baseline
           setKeyboardOffset(5);
-          document.body.classList.remove("keyboard-lock");
+          
         } else {
           // SAFEGUARD: If a real keyboard is up, track it. 
           // Lowering the threshold to 60px catches the keyboard frame even if the 
           // browser header is mid-collapse and stealing layout pixels.
           setKeyboardOffset(offset);
-          document.body.classList.add("keyboard-lock");
         }
       };
 

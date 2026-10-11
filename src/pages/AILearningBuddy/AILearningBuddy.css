@@ -1,9 +1,4 @@
-body.keyboard-lock {
-  overflow: hidden !important;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-}
+
 
 .buddy-page{
   padding: 10px !important;

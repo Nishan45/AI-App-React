@@ -41,7 +41,7 @@ export default function AILearningBuddy() {
     const handleVisualResize = () => {
       // Calculate how much space the keyboard is occupying at the bottom
       const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
-      if(offset<50) return;
+      // if(offset<50) return;
       // Update offset (safeguard against negative values on bounce)
       
       const inputForm = document.querySelector('.chat-input');
@@ -233,7 +233,7 @@ export default function AILearningBuddy() {
                 </div>
                 <div>
                   {m.role === "assistant" && i == messages.length - 1 ? (
-                    <TypingMessage text={m.content} messagesRef={messagesRef} />
+                    <TypingMessage text={m.content} messagesRef={messagesRef} wantToScroll={messages.length>1?true:false} />
                   ) : (
                     <ReactMarkdown>{m.content}</ReactMarkdown>
                   )}

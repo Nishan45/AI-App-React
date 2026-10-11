@@ -39,6 +39,15 @@ export default function AILearningBuddy() {
     if (!window.visualViewport) return;
 
     const handleVisualResize = () => {
+      const activeEl = document.activeElement;
+
+      const isFocusedOnInput = activeEl && (
+        activeEl.tagName === 'INPUT' || 
+        activeEl.tagName === 'TEXTAREA' || 
+        activeEl.isContentEditable
+      );
+      if(!isFocusedOnInput) return;
+      
       // Calculate how much space the keyboard is occupying at the bottom
       const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
       // if(offset<50) return;
@@ -124,6 +133,7 @@ export default function AILearningBuddy() {
 
   React.useEffect(() => {
     const isMobile = window.innerWidth < 650;
+    if(!isMobile) return;
     if (!suggestRef.current) return;
 
     const handleScroll = () => {
@@ -232,7 +242,7 @@ export default function AILearningBuddy() {
                   )}
                 </div>
                 <div>
-                  {m.role === "assistant" && i == messages.length - 1 ? (
+                  {m.role === "assistant" && i == messages.length - 1 && i>0 ? (
                     <TypingMessage text={m.content} messagesRef={messagesRef} wantToScroll={messages.length>1?true:false} />
                   ) : (
                     <ReactMarkdown>{m.content}</ReactMarkdown>

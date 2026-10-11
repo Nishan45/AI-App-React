@@ -2,7 +2,7 @@
   /* min-height: 100vh;
   display: flex; */
 
-  height: 100dvh;
+  height: 100dvh !important;
   min-height: 0;
   /* overflow: hidden; */
 }

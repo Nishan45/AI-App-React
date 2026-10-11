@@ -112,38 +112,67 @@ export default function AILearningBuddy() {
     setThinking(false);
   };
 
-  const handleScroll = () => {
-    const isMobile = window.innerWidth < 650;
-    if(!isMobile) return;
-    if (!messagesRef.current || !suggestRef.current) return;
+  // const handleScroll = () => {
+  //   const isMobile = window.innerWidth < 650;
+  //   if(!isMobile) return;
+  //   if (!messagesRef.current || !suggestRef.current) return;
+  //   console.log("ok")
+  //   const currentScrollTop = messagesRef.current.scrollTop;
+    
+  //   // Calculate the difference in scroll
+  //   const deltaY = currentScrollTop - lastScrollTop.current;
+    
+    
+  //   // Update the position (scrolling down pushes suggestions up, scrolling up brings them down)
+  //   currentTranslateY.current -= deltaY;
+    
+    
+  //   //console.log(deltaY)
+  //   if(deltaY<0){
+  //     suggestRef.current.classList.add("hidden");
+  //     currentTranslateY.current =0;
+  //   }
+    
+  //   else{
+  //     suggestRef.current.classList.remove("hidden");
+  //     suggestRef.current.style.transform = `translateY(${currentTranslateY.current}px)`;
+  //   }
+    
+  //   // Save the current scroll position for the next event
+  //   lastScrollTop.current = currentScrollTop;
+    
+  // };
+  const [scrollOffset, setScrollOffset] = React.useState(0);
 
-    const currentScrollTop = messagesRef.current.scrollTop;
-    
-    // Calculate the difference in scroll
-    const deltaY = currentScrollTop - lastScrollTop.current;
-    
-    
-    // Update the position (scrolling down pushes suggestions up, scrolling up brings them down)
-    currentTranslateY.current -= deltaY;
-    
-    
-    //console.log(deltaY)
-    if(deltaY<0){
-      suggestRef.current.classList.add("hidden");
-      currentTranslateY.current =0;
-    }
-    
-    else{
-      suggestRef.current.classList.remove("hidden");
-      suggestRef.current.style.transform = `translateY(${currentTranslateY.current}px)`;
-    }
-    
-    // Save the current scroll position for the next event
-    lastScrollTop.current = currentScrollTop;
-    
-  };
+  React.useEffect(() => {
+    const isMobile = window.innerWidth < 650;
+    if (!suggestRef.current) return;
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const lastY = lastScrollTop.current;
+      
+      // Calculate how far the user scrolled since the last event
+      const offset = currentY - lastY;
+     // console.log("offset-",scrollOffset)
+      setScrollOffset((cur)=>cur+offset);
+      if(offset<0){
+        setScrollOffset(0);
+      }
+      lastScrollTop.current = currentY;
+    };
+
+    // Use passive: true for scroll performance optimization
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="page buddy-page">
+    <div className="page buddy-page"
+    >
       {/* <div className="page-title-row">
         <div>
           <h4
@@ -154,8 +183,10 @@ export default function AILearningBuddy() {
           </h4>
         </div>
       </div> */}
-      <div className="buddy-grid">
-        <section className="card chat-card">
+      {/* <div className="buddy-grid"> */}
+        <section className="card chat-card"
+        
+        >
           <div className="chat-hero">
             <div className="thinking-bot">
               <span>
@@ -173,8 +204,8 @@ export default function AILearningBuddy() {
               </p> */}
             </div>
           </div>
-          <div className="suggestions-scroll-wrapper">
-          <div className="suggestions" ref={suggestRef}>
+          <div className={`suggestions-scroll-wrapper ${scrollOffset<=0? 'visible' :(scrollOffset>20?'hidden':'')}`} ref={suggestRef}>
+          <div className="suggestions">
             <div className="thinking-bot">
               <span>
                 <Bot size={20} />
@@ -207,8 +238,7 @@ export default function AILearningBuddy() {
           </div>
           <div className="messages"
           
-           ref={messagesRef}
-           onScroll={handleScroll}
+           
            >
             {messages.map((m, i) => (
               <div key={i} className={`message ${m.role}`}>
@@ -322,7 +352,7 @@ export default function AILearningBuddy() {
             </span>
           </div>
         </aside>
-      </div>
+      
     </div>
   );
 }

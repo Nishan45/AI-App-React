@@ -10,6 +10,13 @@
   overflow: hidden;
 }
 
+.buddy-page{
+  display: grid;
+  grid-template-columns: min(75%,900px) 1fr;
+  gap: 10px;
+  height: 100%;
+}
+
 .chat-card {
   padding: 20px;
   height: calc(100dvh - 64px - 20px);
@@ -17,7 +24,7 @@
   /* height: 70vh; */
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .chat-hero {
   flex: 0 0 auto;
@@ -279,6 +286,9 @@
   .buddy-grid {
     grid-template-columns: 1fr;
   }
+  .buddy-page{
+    grid-template-columns: 1fr;
+  }
   .buddy-side {
     display: none;
   }
@@ -423,35 +433,51 @@
 
 @media(max-width:650px){
   .suggestions-scroll-wrapper {
-    position: absolute;
-    top: 68px;
+    position: fixed;
+    top: 64px;
     left: 5px;
     right: 5px;
-    height: 45px;      /* The exact height of your suggestions row */
+    height: 50px;     
     overflow-x: auto;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     z-index: 10;
+    overflow-y: auto;
+  transform: translateY(0);
+  transition:transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     
- 
+    /* Chrome, Safari, and newer Edge versions */
+  &::-webkit-scrollbar {
+    display: none !important;
   }
+  
+  /* Firefox */
+  scrollbar-width: none !important;
+  
+  /* Internet Explorer and Legacy Edge */
+  -ms-overflow-style: none !important;
+  }
+  .suggestions-scroll-wrapper.hidden {
+ transform: translateY(-40px);
+  pointer-events: none;
+}
   .messages{
-    padding-top: 45px;
+    padding-top: 31px;
   }
   .suggestions{
     z-index: 10;
      padding-top: 5px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     background: white;
-    
+    margin-bottom: 0;
   }
   
-  .suggestions.hidden{
+  /* .suggestions.hidden{
     margin: 0;
     padding-top: 5px;
     padding-bottom: 10px;
-    transform: translateY(0) !important; /* Default state: fully visible */
+    transform: translateY(0) !important; 
     transition: transform 0.5s ease-in-out; 
-  }
+  } */
   .page.buddy-page{
     padding:0 !important;
   }
@@ -462,10 +488,6 @@
     width: 50px;
   }
 
-  
-  .chat-card{
-    padding: 5px !important;
-  }
 
   .suggestions::-webkit-scrollbar {
     display: none;
@@ -476,15 +498,17 @@
   }
   
   .chat-card {
-    padding: 10px;
-    height: calc(100dvh - 64px);
+    padding: 5px;
+    /* height: calc(100dvh - 64px); */
+    height: auto;
     /* min-height: 520px; */
     /* height: 70vh; */
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    /* overflow: hidden; */
     border-radius: 0 !important;
     border: none !important;
+    margin-bottom: 40px;
   }
   .chat-hero{
     display: none;
@@ -509,13 +533,40 @@
   
   .chat-input input {
     font-size: 12px;
+    padding-left: 5px;
+  }
+  .chat-input textarea {
+    font-size: 12px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
   .chat-input button {
     font-size: 12px;
+    /* margin-right: 5px; */
+  }
+  .chat-input .chat-input-button-box{
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .chat-card{
+    box-shadow: none !important;
+  }
+  .chat-input{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    background: white;
   }
 }
 @media(max-width:1100px){
   .buddy-grid {
+    grid-template-columns: 1fr;
+  }
+  .buddy-page{
     grid-template-columns: 1fr;
   }
   .buddy-side {

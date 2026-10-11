@@ -41,7 +41,7 @@ export default function AILearningBuddy() {
     const handleVisualResize = () => {
       // Calculate how much space the keyboard is occupying at the bottom
       const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
-      if(offset<150) return;
+      if(offset<50) return;
       // Update offset (safeguard against negative values on bounce)
       
       const inputForm = document.querySelector('.chat-input');
@@ -127,6 +127,10 @@ export default function AILearningBuddy() {
     if (!suggestRef.current) return;
 
     const handleScroll = () => {
+      if(thinking){
+        setScrollOffset(0);
+        return;
+      }
       const currentY = window.scrollY;
       const lastY = lastScrollTop.current;
       
@@ -277,7 +281,7 @@ export default function AILearningBuddy() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onInput={(e) => {
-                
+                setScrollOffset(0);
                 // 1. Reset height to auto so it can shrink if text is deleted
                 e.currentTarget.style.height = "auto";
                 // 2. Set height to match the scroll height of the typed text

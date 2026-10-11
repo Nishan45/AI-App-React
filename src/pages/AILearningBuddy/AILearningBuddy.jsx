@@ -65,6 +65,7 @@ export default function AILearningBuddy() {
       const inputForm = document.querySelector('.chat-input');
       if (inputForm) {
         inputForm.style.paddingBottom = `${offset}px`;
+       
       }
     };
 
@@ -75,7 +76,7 @@ export default function AILearningBuddy() {
       window.visualViewport.removeEventListener('resize', handleVisualResize);
       window.visualViewport.removeEventListener('scroll', handleVisualResize);
     };
-  }, [thinking]);
+  }, []);
 
   // React.useEffect(() => {
   //   const el = messagesRef.current;
@@ -93,9 +94,19 @@ export default function AILearningBuddy() {
   }, [messages]);
 
   const send = async () => {
+
+    const inputForm = document.querySelector('.chat-input');
+      if (inputForm) {
+        inputForm.style.paddingBottom = `5px`;
+      
+      }
+
     if (!input.trim()) return;
 
     setThinking(true);
+
+    
+
     const q = input.trim();
     const updatedMessages = [...aiMessages, { role: "user", content: q }];
     setMessages((msg) => [...msg, { role: "user", content: q }]);

@@ -1,6 +1,10 @@
 .app-shell {
-  min-height: 100vh;
-  display: flex;
+  /* min-height: 100vh;
+  display: flex; */
+
+  height: 100dvh;
+  min-height: 0;
+  /* overflow: hidden; */
 }
 .sidebar {
   position: fixed;

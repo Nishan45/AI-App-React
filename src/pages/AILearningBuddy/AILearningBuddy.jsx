@@ -84,7 +84,7 @@ export default function AILearningBuddy() {
       // 3. Request the very next browser animation frame to double-check the calculations
       // right after the mobile browser header settles its snap transition
       requestAnimationFrame(() => {
-        //updateOffset();
+        updateOffset();
       });
 
       // Calculate how much space the keyboard is occupying at the bottom

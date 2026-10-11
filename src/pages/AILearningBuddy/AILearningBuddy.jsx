@@ -46,7 +46,11 @@ export default function AILearningBuddy() {
         activeEl.tagName === 'TEXTAREA' || 
         activeEl.isContentEditable
       );
-      if(!isFocusedOnInput) return;
+      if(!isFocusedOnInput){
+        if(!thinking){
+          return;
+        }
+      }
 
       // Calculate how much space the keyboard is occupying at the bottom
       const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
@@ -79,6 +83,7 @@ export default function AILearningBuddy() {
         top: document.documentElement.scrollHeight,
         behavior: "smooth"
       });
+
     
   }, [messages]);
 

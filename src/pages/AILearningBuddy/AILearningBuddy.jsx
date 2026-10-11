@@ -75,7 +75,7 @@ export default function AILearningBuddy() {
       window.visualViewport.removeEventListener('resize', handleVisualResize);
       window.visualViewport.removeEventListener('scroll', handleVisualResize);
     };
-  }, []);
+  }, [thinking]);
 
   // React.useEffect(() => {
   //   const el = messagesRef.current;

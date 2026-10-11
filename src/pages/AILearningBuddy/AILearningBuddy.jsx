@@ -225,35 +225,6 @@ export default function AILearningBuddy() {
     };
   }, []);
 
-  React.useEffect(() => {
-    const viewport = window.visualViewport;
-    if (!viewport) return;
-
-    const updateViewport = () => {
-      const height = viewport.height;
-      const top = viewport.offsetTop;
-
-      document.documentElement.style.setProperty(
-        "--app-height",
-        `${height}px`
-      );
-
-      document.documentElement.style.setProperty(
-        "--app-top",
-        `${top}px`
-      );
-    };
-
-    updateViewport();
-
-    viewport.addEventListener("resize", updateViewport);
-    viewport.addEventListener("scroll", updateViewport);
-
-    return () => {
-      viewport.removeEventListener("resize", updateViewport);
-      viewport.removeEventListener("scroll", updateViewport);
-    };
-  }, []);
 
   return (
     <div className="page buddy-page"

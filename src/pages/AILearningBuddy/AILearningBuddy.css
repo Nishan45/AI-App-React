@@ -17,7 +17,7 @@
   grid-template-columns: min(75%,900px) 1fr;
   gap: 10px;
   /* height: calc(100dvh - 64px - 64px); */
-  /* height: 100dvh; */
+  height: 100%;
   
 }
 

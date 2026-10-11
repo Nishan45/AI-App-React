@@ -462,7 +462,7 @@
 }
   .messages{
     padding-top: 31px;
-    min-height: calc(100dvh - 64px - 64px);
+    /* min-height: calc(100dvh - 64px - 64px); */
   }
   .suggestions{
     z-index: 10;

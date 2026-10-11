@@ -49,16 +49,39 @@ export default function AILearningBuddy() {
         activeEl.isContentEditable
       );
 
-      let offset = Math.max(5,window.innerHeight - window.visualViewport.height);
+      // let offset = Math.max(5,window.innerHeight - window.visualViewport.height);
 
-      if(!isFocusedOnInput){
-        setKeyboardOffset(5);
+      // if(!isFocusedOnInput){
+      //   setKeyboardOffset(5);
       
-      }
-      else{
-        setKeyboardOffset(offset);
+      // }
+      // else{
+      //   setKeyboardOffset(offset);
         
-      }
+      // }
+      const updateOffset = () => {
+        // Calculate how much layout space the keyboard is occupying at the bottom
+        let offset = Math.max(5,window.innerHeight - window.visualViewport.height);
+
+        if (!isFocusedOnInput) {
+          // If the user isn't focused on the text area, force the layout back down to baseline
+          setKeyboardOffset(5);
+        } else {
+          // SAFEGUARD: If a real keyboard is up, track it. 
+          // Lowering the threshold to 60px catches the keyboard frame even if the 
+          // browser header is mid-collapse and stealing layout pixels.
+          setKeyboardOffset(offset);
+        }
+      };
+
+      updateOffset();
+
+      // 3. Request the very next browser animation frame to double-check the calculations
+      // right after the mobile browser header settles its snap transition
+      requestAnimationFrame(() => {
+        updateOffset();
+      });
+
       // Calculate how much space the keyboard is occupying at the bottom
       // const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
       // if(offset<50) return;
@@ -78,7 +101,7 @@ export default function AILearningBuddy() {
       window.visualViewport.removeEventListener('resize', handleVisualResize);
       window.visualViewport.removeEventListener('scroll', handleVisualResize);
     };
-  }, []);
+  }, [thinking]);
 
   // React.useEffect(() => {
   //   const el = messagesRef.current;

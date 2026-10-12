@@ -1,11 +1,7 @@
 .app-shell {
-  /* min-height: 100vh;
-  display: flex; */
-
   height: 100dvh !important;
   min-height: 0;
-  /* overflow: hidden; */
-  
+  background: white;
 }
 .sidebar {
   position: fixed;
@@ -104,6 +100,7 @@
   margin-left: 250px;
   background-color: white;
 }
+
 .topbar {
   height: 64px;
   padding: 0 30px;
@@ -174,11 +171,11 @@
   display: none;
 }
 
-@media (max-width:1200px){
-  .sidebar{
+@media (max-width: 1200px) {
+  .sidebar {
     width: 215px;
   }
-  .shell-main{
+  .shell-main {
     margin-left: 215px;
   }
 }

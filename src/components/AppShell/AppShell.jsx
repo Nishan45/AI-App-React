@@ -33,7 +33,7 @@ const navItems = [
 export default function AppShell() {
   const [open, setOpen] = React.useState(false),
     [profileOpen, setProfileOpen] = React.useState(false);
-  const {user}=useAuth();
+  const { user } = useAuth();
   const { logout } = useAuth();
   const location = useLocation(),
     navigate = useNavigate();
@@ -44,9 +44,9 @@ export default function AppShell() {
     setProfileOpen(false);
     navigate("/login");
   };
-  
+
   return (
-    <div className="app-shell" >
+    <div className="app-shell">
       <aside className={`sidebar ${open ? "sidebar-open" : ""}`}>
         <div className="brand">
           <div className="brand-mark">AI</div>
@@ -97,9 +97,14 @@ export default function AppShell() {
               onClick={() => setProfileOpen((v) => !v)}
               aria-expanded={profileOpen}
             >
-              <div className="avatar">{user.firstName[0]}{user.lastName[0]}</div>
+              <div className="avatar">
+                {user.firstName[0]}
+                {user.lastName[0]}
+              </div>
               <div className="profile-text">
-                <strong>{user.firstName} {user.lastName}</strong>
+                <strong>
+                  {user.firstName} {user.lastName}
+                </strong>
                 <span>Class {user.class}</span>
               </div>
               <ChevronDown size={14} />
@@ -107,7 +112,10 @@ export default function AppShell() {
             {profileOpen && (
               <div className="profile-dropdown">
                 <button onClick={() => navigate("/my-progress")}>
-                  <div className="avatar small">{user.firstName[0]}{user.lastName[0]}</div>
+                  <div className="avatar small">
+                    {user.firstName[0]}
+                    {user.lastName[0]}
+                  </div>
                   <span>My Progress</span>
                 </button>
                 <button className="logout-item" onClick={logOut}>

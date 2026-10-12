@@ -2,7 +2,6 @@ import React from "react";
 import {
   Bot,
   Brain,
-  Calculator,
   HelpCircle,
   Send,
   Sparkles,
@@ -13,7 +12,6 @@ import { useAuth } from "../../components/contextApi";
 import api from "../../services/API";
 import ReactMarkdown from "react-markdown";
 import TypingMessage from "../../components/typingEffect";
-import { useKeyboardViewport } from "../../components/useKeyBoardViewPort";
 
 export default function AILearningBuddy() {
   const { user } = useAuth();
@@ -33,121 +31,26 @@ export default function AILearningBuddy() {
 
   const [input, setInput] = React.useState("");
   const messagesRef = React.useRef(null);
-  const suggestRef = React.useRef(null);
   const lastScrollTop = React.useRef(0);
-  const [keyboardOffset, setKeyboardOffset] = React.useState(5);
-  
+  const [scrollOffset, setScrollOffset] = React.useState(0);
 
   React.useEffect(() => {
-    if (!window.visualViewport) return;
-
-    const handleVisualResize = () => {
-      const activeEl = document.activeElement;
-
-      const isFocusedOnInput = activeEl && (
-        activeEl.tagName === 'INPUT' || 
-        activeEl.tagName === 'TEXTAREA' || 
-        activeEl.isContentEditable
-      );
-
-      // let offset = Math.max(5,window.innerHeight - window.visualViewport.height);
-
-      // if(!isFocusedOnInput){
-      //   setKeyboardOffset(5);
-      
-      // }
-      // else{
-      //   setKeyboardOffset(offset);
-        
-      // }
-      const app_shell=document.querySelector(".app-shell");
-      const updateOffset = () => {
-         
-        // Calculate how much layout space the keyboard is occupying at the bottom
-        let offset = Math.max(5,window.innerHeight - window.visualViewport.height);
-        if(offset<=10){
-          setKeyboardOffset(5);
-          app_shell.style.overflow="auto";
-        }
-        if (!isFocusedOnInput) {
-          // If the user isn't focused on the text area, force the layout back down to baseline
-          setKeyboardOffset(5);
-          app_shell.style.overflow="auto";
-          
-        } else {
-          // SAFEGUARD: If a real keyboard is up, track it. 
-          // Lowering the threshold to 60px catches the keyboard frame even if the 
-          // browser header is mid-collapse and stealing layout pixels.
-          //setKeyboardOffset(offset);
-          app_shell.style.overflow="hidden";
-
-          
-        }
-      };
-
-      // 3. Request the very next browser animation frame to double-check the calculations
-      // right after the mobile browser header settles its snap transition
-      requestAnimationFrame(() => {
-        //updateOffset();
+    const isMobile = window.innerWidth < 650;
+    if (!isMobile) {
+      const el = messagesRef.current;
+      if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+    } else {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
       });
-
-      // Calculate how much space the keyboard is occupying at the bottom
-      // const offset = Math.max(5,window.innerHeight - window.visualViewport.height);
-      // if(offset<50) return;
-      // Update offset (safeguard against negative values on bounce)
-
-      // const inputForm = document.querySelector('.chat-input');
-      // if (inputForm) {
-      //   inputForm.style.paddingBottom = `${offset}px`;
-       
-      // }
-    };
-
-    window.visualViewport.addEventListener('resize', handleVisualResize);
-    window.visualViewport.addEventListener('scroll', handleVisualResize);
-
-    return () => {
-      window.visualViewport.removeEventListener('resize', handleVisualResize);
-      window.visualViewport.removeEventListener('scroll', handleVisualResize);
-    };
-  }, [thinking]);
-
-  // React.useEffect(() => {
-  //   const el = messagesRef.current;
-  //   if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
-  // }, [messages]);
-
-  React.useEffect(() => {
-      if(messages.length<=1) return;
-
-      const isMobile = window.innerWidth < 650;
-      if(!isMobile){
-        const el = messagesRef.current;
-        if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
-      }
-      else{
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: "smooth"
-        });
-      }
-
-    
+    }
   }, [messages]);
 
   const send = async () => {
-
-    const inputForm = document.querySelector('.chat-input');
-      if (inputForm) {
-        inputForm.style.paddingBottom = `5px`;
-      
-      }
-
     if (!input.trim()) return;
 
     setThinking(true);
-
-    
 
     const q = input.trim();
     const updatedMessages = [...aiMessages, { role: "user", content: q }];
@@ -192,27 +95,23 @@ export default function AILearningBuddy() {
     setThinking(false);
   };
 
-  const [scrollOffset, setScrollOffset] = React.useState(0);
-  
-
   React.useEffect(() => {
     const isMobile = window.innerWidth < 650;
-    if(!isMobile) return;
-    if (!suggestRef.current) return;
+    if (!isMobile) return;
 
     const handleScroll = () => {
-      if(thinking){
+      if (thinking) {
         setScrollOffset(0);
         return;
       }
       const currentY = window.scrollY;
       const lastY = lastScrollTop.current;
-      
+
       // Calculate how far the user scrolled since the last event
       const offset = currentY - lastY;
-     // console.log("offset-",scrollOffset)
-      setScrollOffset((cur)=>cur+offset);
-      if(offset<0){
+      // console.log("offset-",scrollOffset)
+      setScrollOffset((cur) => cur + offset);
+      if (offset < 0) {
         setScrollOffset(0);
       }
       lastScrollTop.current = currentY;
@@ -226,11 +125,8 @@ export default function AILearningBuddy() {
     };
   }, []);
 
-  const viewportHeight = useKeyboardViewport();
-
   return (
-    <div className="page buddy-page"
-    >
+    <div className="page buddy-page">
       {/* <div className="page-title-row">
         <div>
           <h4
@@ -242,27 +138,27 @@ export default function AILearningBuddy() {
         </div>
       </div> */}
       {/* <div className="buddy-grid"> */}
-        <section className="card chat-card"
-        style={{ height: `calc(${viewportHeight}px - 64px - 20px)`}}
-        >
-          <div className="chat-hero">
-            <div className="thinking-bot">
-              <span>
-                <Bot size={20} />
-              </span>
-              <i />
-            </div>
-            <div>
-              {/* <strong>I'm your AI Learning Buddy</strong> */}
-              Ask questions, get help with your lessons, or solve problems
-              together.
-              {/* <p>
+      <section className="card chat-card">
+        <div className="chat-hero">
+          <div className="thinking-bot">
+            <span>
+              <Bot size={20} />
+            </span>
+            <i />
+          </div>
+          <div>
+            {/* <strong>I'm your AI Learning Buddy</strong> */}
+            Ask questions, get help with your lessons, or solve problems
+            together.
+            {/* <p>
                 Ask questions, get help with your lessons, or solve problems
                 together.
               </p> */}
-            </div>
           </div>
-          <div className={`suggestions-scroll-wrapper ${scrollOffset<=0? 'visible' :(scrollOffset>20?'hidden':'')}`} ref={suggestRef}>
+        </div>
+        <div
+          className={`suggestions-scroll-wrapper ${scrollOffset <= 0 ? "visible" : scrollOffset > 20 ? "hidden" : ""}`}
+        >
           <div className="suggestions">
             <div className="thinking-bot">
               <span>
@@ -293,182 +189,111 @@ export default function AILearningBuddy() {
               ))}
             </div>
           </div>
-          </div>
-          <div className="messages"
-          ref={messagesRef}
-           
-           >
-            {messages.map((m, i) => (
-              <div key={i} className={`message ${m.role}`}>
-                <div className="message-icon">
-                  {m.role === "assistant" ? (
-                    <Bot size={13} />
-                  ) : (
-                    <UserRound size={13} />
-                  )}
-                </div>
-                <div>
-                  {m.role === "assistant" && i == messages.length - 1 && i>0 ? (
-                    <TypingMessage text={m.content} messagesRef={messagesRef} wantToScroll={messages.length>1?true:false} />
-                  ) : (
-                    <ReactMarkdown>{m.content}</ReactMarkdown>
-                  )}
-                </div>
-              </div>
-            ))}
-            {thinking && (
-              <div className={`message assistant`}>
-                <div className="message-icon">
+        </div>
+        <div className="messages" ref={messagesRef}>
+          {messages.map((m, i) => (
+            <div key={i} className={`message ${m.role}`}>
+              <div className="message-icon">
+                {m.role === "assistant" ? (
                   <Bot size={13} />
-                </div>
-                <div className="thinking-bubble">
-                  <span className="dot"></span>
-                  <span className="dot"></span>
-                  <span className="dot"></span>
-                </div>
+                ) : (
+                  <UserRound size={13} />
+                )}
               </div>
-            )}
-          </div>
-          <form
-            className="chat-input desktop"
-            // style={{ paddingBottom: `${keyboardOffset}px` }}
-            onSubmit={(e) => {
-
-              e.preventDefault();
-              
-              if (!thinking) {
-                send();
-                const textarea = e.currentTarget.querySelector('textarea');
-                if (textarea) {
-                  textarea.style.height = "auto";
+              <div>
+                {m.role === "assistant" && i == messages.length - 1 && i > 0 ? (
+                  <TypingMessage
+                    text={m.content}
+                    messagesRef={messagesRef}
+                    wantToScroll={true}
+                  />
+                ) : (
+                  <ReactMarkdown>{m.content}</ReactMarkdown>
+                )}
+              </div>
+            </div>
+          ))}
+          {thinking && (
+            <div className={`message assistant`}>
+              <div className="message-icon">
+                <Bot size={13} />
+              </div>
+              <div className="thinking-bubble">
+                <span className="dot"></span>
+                <span className="dot"></span>
+                <span className="dot"></span>
+              </div>
+            </div>
+          )}
+        </div>
+        <form
+          className="chat-input"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!thinking) {
+              send();
+              const textarea = e.currentTarget.querySelector("textarea");
+              if (textarea) {
+                textarea.style.height = "auto";
+              }
+            }
+          }}
+        >
+          <textarea
+            name="text"
+            id="chat-input-text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onInput={(e) => {
+              setScrollOffset(0);
+              e.currentTarget.style.height = "auto";
+              e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault(); // Prevents adding a newline on submit
+                if (!thinking && input.trim()) {
+                  send();
                 }
               }
             }}
-          >
-            {/* <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your question here..."
-            /> */}
-            <textarea
-            name="text"
-            id="chat-input-text"
-            
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onInput={(e) => {
-                setScrollOffset(0);
-                // 1. Reset height to auto so it can shrink if text is deleted
-                
-                e.currentTarget.style.height = "auto";
-                // 2. Set height to match the scroll height of the typed text
-                e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
-              }}
-              
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault(); // Prevents adding a newline on submit
-                  if (!thinking && input.trim()) {
-                    send();
-                  }
-                }}}
-              placeholder="Type your question here..."
-              rows={1} // Starts as a single line
-            />
-            <div className="chat-input-button-box">
-
-            
+            placeholder={`Type your question here...`}
+            rows={1} // Starts as a single line
+          />
+          <div className="chat-input-button-box">
             <button
               type="submit"
               className={`submit ${thinking ? "thinking" : "not-thinking"}`}
             >
               <span>Send</span> <Send size={12} />
             </button>
-            </div>
-          </form>
-        </section>
-        <aside className="card buddy-side">
-          <div className="side-title">
-            <Brain />
-            <div>
-              <strong>Sample Questions</strong>
-              <span>Try one of these questions</span>
-            </div>
           </div>
-          <ol>
-            {[
-              "Why was the AI model not accurate in my last test?",
-              "What are the key differences between AI and ML?",
-              "What are some real-world examples of AI in daily life?",
-            ].map((x) => (
-              <li key={x}>{x}</li>
-            ))}
-          </ol>
-          <div className="buddy-tip">
-            <HelpCircle />
-            <span>
-              Tip: Ask follow-up questions when you want a simpler explanation.
-            </span>
+        </form>
+      </section>
+      <aside className="card buddy-side">
+        <div className="side-title">
+          <Brain />
+          <div>
+            <strong>Sample Questions</strong>
+            <span>Try one of these questions</span>
           </div>
-        </aside>
-      
-      <form
-            className="chat-input mobile"
-            style={{ paddingBottom: `${keyboardOffset}px` }}
-            onSubmit={(e) => {
-
-              e.preventDefault();
-              
-              if (!thinking) {
-                send();
-                const textarea = e.currentTarget.querySelector('textarea');
-                if (textarea) {
-                  textarea.style.height = "auto";
-                }
-              }
-            }}
-          >
-            {/* <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your question here..."
-            /> */}
-            <textarea
-            name="text"
-            id="chat-input-text"
-            
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onInput={(e) => {
-                setScrollOffset(0);
-                // 1. Reset height to auto so it can shrink if text is deleted
-                
-                e.currentTarget.style.height = "auto";
-                // 2. Set height to match the scroll height of the typed text
-                e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
-              }}
-              
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault(); // Prevents adding a newline on submit
-                  if (!thinking && input.trim()) {
-                    send();
-                  }
-                }}}
-              placeholder="Type your question here..."
-              rows={1} // Starts as a single line
-            />
-            <div className="chat-input-button-box">
-
-            
-            <button
-              type="submit"
-              className={`submit ${thinking ? "thinking" : "not-thinking"}`}
-            >
-              <span>Send</span> <Send size={12} />
-            </button>
-            </div>
-          </form>
+        </div>
+        <ol>
+          {[
+            "Why was the AI model not accurate in my last test?",
+            "What are the key differences between AI and ML?",
+            "What are some real-world examples of AI in daily life?",
+          ].map((x) => (
+            <li key={x}>{x}</li>
+          ))}
+        </ol>
+        <div className="buddy-tip">
+          <HelpCircle />
+          <span>
+            Tip: Ask follow-up questions when you want a simpler explanation.
+          </span>
+        </div>
+      </aside>
     </div>
   );
 }

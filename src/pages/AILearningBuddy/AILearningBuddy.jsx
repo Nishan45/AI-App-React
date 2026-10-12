@@ -227,6 +227,7 @@ export default function AILearningBuddy() {
           )}
         </div>
         <form
+          onClick={(e)=>setScrollOffset(0)}
           className="chat-input"
           onSubmit={(e) => {
             e.preventDefault();

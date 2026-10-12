@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import "./AppShell.css";
 import { useAuth } from "../contextApi";
-import { useKeyboardViewport } from "../useKeyBoardViewPort";
 
 const navItems = [
   ["/dashboard", "Dashboard", LayoutDashboard],
@@ -45,9 +44,9 @@ export default function AppShell() {
     setProfileOpen(false);
     navigate("/login");
   };
-  const viewportHeight = useKeyboardViewport();
+  
   return (
-    <div className="app-shell" style={{ height: `${viewportHeight}px`}}>
+    <div className="app-shell" >
       <aside className={`sidebar ${open ? "sidebar-open" : ""}`}>
         <div className="brand">
           <div className="brand-mark">AI</div>

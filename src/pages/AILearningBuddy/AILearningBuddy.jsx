@@ -13,6 +13,7 @@ import { useAuth } from "../../components/contextApi";
 import api from "../../services/API";
 import ReactMarkdown from "react-markdown";
 import TypingMessage from "../../components/typingEffect";
+import { useKeyboardViewport } from "../../components/useKeyBoardViewPort";
 
 export default function AILearningBuddy() {
   const { user } = useAuth();
@@ -225,6 +226,7 @@ export default function AILearningBuddy() {
     };
   }, []);
 
+  const viewportHeight = useKeyboardViewport();
 
   return (
     <div className="page buddy-page"
@@ -241,7 +243,7 @@ export default function AILearningBuddy() {
       </div> */}
       {/* <div className="buddy-grid"> */}
         <section className="card chat-card"
-        
+        style={{ height: `calc(${viewportHeight}px - 64px - 20px)`}}
         >
           <div className="chat-hero">
             <div className="thinking-bot">
@@ -328,8 +330,8 @@ export default function AILearningBuddy() {
             )}
           </div>
           <form
-            className="chat-input"
-            style={{ paddingBottom: `${keyboardOffset}px` }}
+            className="chat-input desktop"
+            // style={{ paddingBottom: `${keyboardOffset}px` }}
             onSubmit={(e) => {
 
               e.preventDefault();
@@ -410,6 +412,63 @@ export default function AILearningBuddy() {
           </div>
         </aside>
       
+      <form
+            className="chat-input mobile"
+            style={{ paddingBottom: `${keyboardOffset}px` }}
+            onSubmit={(e) => {
+
+              e.preventDefault();
+              
+              if (!thinking) {
+                send();
+                const textarea = e.currentTarget.querySelector('textarea');
+                if (textarea) {
+                  textarea.style.height = "auto";
+                }
+              }
+            }}
+          >
+            {/* <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your question here..."
+            /> */}
+            <textarea
+            name="text"
+            id="chat-input-text"
+            
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onInput={(e) => {
+                setScrollOffset(0);
+                // 1. Reset height to auto so it can shrink if text is deleted
+                
+                e.currentTarget.style.height = "auto";
+                // 2. Set height to match the scroll height of the typed text
+                e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+              }}
+              
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault(); // Prevents adding a newline on submit
+                  if (!thinking && input.trim()) {
+                    send();
+                  }
+                }}}
+              placeholder="Type your question here..."
+              rows={1} // Starts as a single line
+            />
+            <div className="chat-input-button-box">
+
+            
+            <button
+              type="submit"
+              className={`submit ${thinking ? "thinking" : "not-thinking"}`}
+            >
+              <span>Send</span> <Send size={12} />
+            </button>
+            </div>
+          </form>
     </div>
   );
 }

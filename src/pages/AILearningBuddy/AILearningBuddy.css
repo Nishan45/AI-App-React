@@ -435,6 +435,12 @@
     white-space: nowrap;
   }
 
+@media(min-width:650px){
+  .chat-input.mobile{
+    display: none;
+    height: 0;
+  }
+}
 @media(max-width:650px){
   .suggestions-scroll-wrapper {
     position: fixed;
@@ -501,8 +507,11 @@
     
     white-space: nowrap;
   }
-  
-  .chat-card {
+  .chat-input.desktop{
+    height: 0;
+    display: none;
+  }
+  .chat-card{
     padding: 5px;
     
     height: auto;
@@ -536,21 +545,21 @@
     font-size: 12px;
   }
   
-  .chat-input input {
+  .chat-input.mobile input {
     font-size: 12px;
     padding-left: 5px;
   }
-  .chat-input textarea {
+  .chat-input.mobile textarea {
     font-size: 12px;
     margin-left: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
   }
-  .chat-input button {
+  .chat-input.mobile button {
     font-size: 12px;
     /* margin-right: 5px; */
   }
-  .chat-input .chat-input-button-box{
+  .chat-input.mobile .chat-input-button-box{
     margin-right: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -558,7 +567,7 @@
   .chat-card{
     box-shadow: none !important;
   }
-  .chat-input{
+  .chat-input.mobile{
     position: fixed;
     left: 0;
     right: 0;

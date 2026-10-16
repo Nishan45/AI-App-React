@@ -6,6 +6,11 @@ import {
   Send,
   Sparkles,
   UserRound,
+  Mic,
+  CircleStop,
+  Dot,
+  Square
+  
 } from "lucide-react";
 import "./AILearningBuddy.css";
 import { useAuth } from "../../components/contextApi";
@@ -33,6 +38,116 @@ export default function AILearningBuddy() {
   const messagesRef = React.useRef(null);
   const lastScrollTop = React.useRef(0);
   const [scrollOffset, setScrollOffset] = React.useState(0);
+
+  const [isListening, setIsListening] = React.useState(false);
+  const recognitionRef = React.useRef(null);
+  const textareaRef = React.useRef(null);
+   
+
+
+  React.useEffect(() => {
+    // 1. Initialize the Web Speech Recognition Engine
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (SpeechRecognition) {
+    
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;         // Keep listening even if the user pauses
+      recognition.interimResults = true;     // Show text *while* you speak, not just at the end
+      recognition.lang = 'en-US';            // Set language (e.g., 'en-IN' or 'en-US')
+
+      recognition.onresult = (event) => {
+        let finalTranscript = '';
+        
+        // Loop through all results generated during this session
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            finalTranscript += event.results[i][0].transcript;
+          } else {
+            // This is the live "interim" text updating as you talk
+            finalTranscript += event.results[i][0].transcript;
+          }
+        }
+
+        // 2. Stream the text directly into the input state
+        setInput((msg)=>msg+" "+finalTranscript);
+
+        // 3. Trigger auto-grow calculation instantly for the layout
+        if (textareaRef.current) {
+          textareaRef.current.style.height = "auto";
+          textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+        }
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error", event.error);
+        setIsListening(false);
+        const bars = document.querySelectorAll('.chat-input-listening');
+        bars.forEach(bar => bar.remove());
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+        const bars = document.querySelectorAll('.chat-input-listening');
+        bars.forEach(bar => bar.remove());
+      };
+    
+
+      recognitionRef.current = recognition;
+    }
+  
+  }, []);
+
+  const totalBars = 50;
+
+  // Toggle listening state
+  const toggleListening = () => {
+    if (!recognitionRef.current) {
+      alert("Speech recognition is not supported in this browser. Try Chrome or Safari.");
+      return;
+    }
+
+    if (isListening) {
+
+      recognitionRef.current.stop();
+      setIsListening(false);
+      const bars = document.querySelectorAll('.chat-input-listening');
+      bars.forEach(bar => bar.remove());
+    } else {
+      setInput(''); // Clear input for new recording session, or omit this to append text
+      recognitionRef.current.start();
+      setIsListening(true);
+
+      const parent = document.querySelector(".chat-input-text-voice");
+      const totalnum=((parent.offsetWidth-40)/10);
+
+      for (let i = 0; i < totalnum; i++) {
+        //console.log(totalnum)
+        const bar = document.createElement("div");
+        bar.classList.add("chat-input-listening");
+
+        const rightOffset = 30+i*10; 
+        bar.style.setProperty('--start-right', `${rightOffset}px`);
+        //bar.style.animationDelay = `${i * 0.15}s`;
+        const calculatedDelay = (i / totalnum) * -2; 
+         bar.style.setProperty('--delay-time', `${calculatedDelay}s`); 
+
+        bar.innerHTML = `
+        <svg 
+          xmlns="http://w3.org" 
+          width="4" 
+          height="8" 
+          viewBox="0 0 5 8" 
+          fill="currentColor" 
+          stroke="none"
+        >
+          <rect width="4" height="8" x="0" y="0" />
+        </svg>
+        `;
+        parent.appendChild(bar);
+      }
+    }
+  };
 
   React.useEffect(() => {
     const isMobile = window.innerWidth < 650;
@@ -175,6 +290,7 @@ export default function AILearningBuddy() {
                 <button
                   key={x}
                   onClick={() => {
+                    if(isListening) return;
                     setInput(x);
                     setTimeout(
                       () =>
@@ -232,19 +348,31 @@ export default function AILearningBuddy() {
           onSubmit={(e) => {
             e.preventDefault();
             if (!thinking) {
+              if(input.length>0 && !isListening){
               send();
               const textarea = e.currentTarget.querySelector("textarea");
               if (textarea) {
                 textarea.style.height = "auto";
               }
+              }
+              else{
+                toggleListening();
+              }
             }
           }}
         >
+          <div className="chat-input-text-voice">
+            {/* {<div className="chat-input-listening">
+              <Square fill="currentColor" size={5}/>
+            </div>} */}
           <textarea
             name="text"
             id="chat-input-text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            value={(isListening?"":input)}
+            ref={textareaRef}
+            onChange={(e) => {
+              if(!isListening) setInput(e.target.value)
+            }}
             onInput={(e) => {
               setScrollOffset(0);
               e.currentTarget.style.height = "auto";
@@ -258,15 +386,22 @@ export default function AILearningBuddy() {
                 }
               }
             }}
-            placeholder={`Type your question here...`}
+            placeholder={(isListening)?"":`Type your question here...`}
             rows={1} // Starts as a single line
           />
+          <div className="chat-input-voice" onClick={(e)=>{
+            if(!thinking){
+              toggleListening();
+            }
+            
+          }}>{isListening?<CircleStop size={18}/>:<Mic size={18}/>}</div>
+          </div>
           <div className="chat-input-button-box">
             <button
               type="submit"
-              className={`submit ${thinking ? "thinking" : "not-thinking"}`}
+              className={`submit ${(thinking||isListening) ? "thinking" : "not-thinking"}`}
             >
-              <span>Send</span> <Send size={12} />
+              <span>Send</span> <Send size={14} />
             </button>
           </div>
         </form>

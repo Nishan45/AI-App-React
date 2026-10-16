@@ -8,6 +8,7 @@ import {
   Sparkles,
   Target,
   Trophy,
+  Network,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
@@ -33,6 +34,16 @@ export default function Dashboard() {
       </div>
 
       <div className="stat-grid">
+        <div className="dash-stat" onClick={() => navigate("/modules")}>
+          <div className="icon-tile">
+            <Network />
+          </div>
+          <div>
+            <span>Our Partners</span>
+            <strong>3</strong>
+          </div>
+          
+        </div>
         <div className="dash-stat" onClick={() => navigate("/modules")}>
           <div className="icon-tile">
             <PlayCircle />

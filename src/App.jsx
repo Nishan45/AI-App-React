@@ -12,6 +12,7 @@ import MyProgress from "./pages/MyProgress/MyProgress";
 import AILearningBuddy from "./pages/AILearningBuddy/AILearningBuddy";
 import HelpSupport from "./pages/HelpSupport/HelpSupport";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PartnerPortal from "./pages/PartnerPortal/partnerPortal";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/projects-activities" element={<ProjectsActivities />} />
           <Route path="/my-progress" element={<MyProgress />} />
           <Route path="/ai-learning-buddy" element={<AILearningBuddy />} />
+          <Route path="/partner-portal" element={<PartnerPortal />} />
           <Route path="/help-support" element={<HelpSupport />} />
         </Route>
       </Route>

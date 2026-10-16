@@ -14,6 +14,7 @@ import {
   X,
   ChevronDown,
   LogOut,
+  Network,
 } from "lucide-react";
 import "./AppShell.css";
 import { useAuth } from "../contextApi";
@@ -27,6 +28,7 @@ const navItems = [
   ["/projects-activities", "Projects & Activities", BriefcaseBusiness],
   ["/my-progress", "My Progress", ChartNoAxesColumnIncreasing],
   ["/ai-learning-buddy", "AI Learning Buddy", Bot],
+  ["/partner-portal", "Partner Portal", Network],
   ["/help-support", "Help & Support", LifeBuoy],
 ];
 

@@ -13,7 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 import { useAuth } from "../../components/contextApi";
-import { getAssignmentsProgressPercentage, getModuleProgressPercentage, getProgressPercentage, getProjectsProgressPercentage, getQuizProgressPercentage, modules } from "../../data/courseData";
+import { getAssignmentsProgressPercentage, getModuleProgressPercentage, getProgressPercentage, getProjectsProgressPercentage, getQuizProgressPercentage, modules, partnerSchools } from "../../data/courseData";
 
 export default function Dashboard() {
   const {user}=useAuth();
@@ -34,13 +34,13 @@ export default function Dashboard() {
       </div>
 
       <div className="stat-grid">
-        <div className="dash-stat" onClick={() => navigate("/modules")}>
+        <div className="dash-stat" onClick={() => navigate("/partner-portal")}>
           <div className="icon-tile">
             <Network />
           </div>
           <div>
             <span>Our Partners</span>
-            <strong>3</strong>
+            <strong>{partnerSchools.length}</strong>
           </div>
           
         </div>

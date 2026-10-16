@@ -3,56 +3,12 @@ import "./PartnerPortal.css";
 import {
   MapPin
 } from "lucide-react";
+import { partnerSchools } from "../../data/courseData";
 
-const schools = [
-  {
-    id: 1,
-    name: "The Summit School",
-    location: "Kolkata",
-    students: 420,
-    classes: 12,
-    progress: 78,
-    assessment: 86,
-    modules: [
-      { name: "Module 1", progress: 100 },
-      { name: "Module 2", progress: 82 },
-      { name: "Module 3", progress: 68 },
-      { name: "Module 4", progress: 41 },
-    ],
-  },
-  {
-    id: 2,
-    name: "Subhashgram Gems Public School",
-    location: "Kolkata",
-    students: 350,
-    classes: 10,
-    progress: 71,
-    assessment: 82,
-    modules: [
-      { name: "Module 1", progress: 100 },
-      { name: "Module 2", progress: 76 },
-      { name: "Module 3", progress: 64 },
-      { name: "Module 4", progress: 44 },
-    ],
-  },
-//   {
-//     id: 3,
-//     name: "DPS International",
-//     location: "Bangalore",
-//     students: 510,
-//     classes: 15,
-//     progress: 84,
-//     assessment: 91,
-//     modules: [
-//       { name: "Module 1", progress: 100 },
-//       { name: "Module 2", progress: 92 },
-//       { name: "Module 3", progress: 81 },
-//       { name: "Module 4", progress: 63 },
-//     ],
-//   },
-];
+
 
 export default function PartnerPortal() {
+    const schools=partnerSchools;
   const [activePage, setActivePage] = useState("home");
   const [search, setSearch] = useState("");
   const [selectedSchool, setSelectedSchool] = useState(null);

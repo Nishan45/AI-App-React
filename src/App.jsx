@@ -12,7 +12,8 @@ import MyProgress from "./pages/MyProgress/MyProgress";
 import AILearningBuddy from "./pages/AILearningBuddy/AILearningBuddy";
 import HelpSupport from "./pages/HelpSupport/HelpSupport";
 import ProtectedRoute from "./components/ProtectedRoute";
-import PartnerPortal from "./pages/PartnerPortal/partnerPortal";
+import PartnerPortal from "./pages/PartnerPortal/PartnerPortal";
+
 
 export default function App() {
   return (

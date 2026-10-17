@@ -52,7 +52,7 @@ export default function PartnerPortal() {
             <>
 
               {/* WELCOME */}
-              <section className="welcome-section">
+              {/* <section className="welcome-section">
 
                 <div>
                   
@@ -65,10 +65,10 @@ export default function PartnerPortal() {
                   </p>
                 </div>
 
-              </section>
+              </section> */}
 
 
-              {/* SUMMARY */}
+{/*               
               <section className="partner-summary">
 
                 <div className="summary-card">
@@ -130,7 +130,7 @@ export default function PartnerPortal() {
 
                 </div>
 
-              </section>
+              </section> */}
 
 
               {/* SCHOOL SECTION */}
@@ -197,7 +197,7 @@ export default function PartnerPortal() {
                         <div className="school-icon">
                           🏫
                         </div>
-
+                        <h3>{school.name}</h3>
                         <span className="school-status">
                           Active
                         </span>
@@ -207,15 +207,15 @@ export default function PartnerPortal() {
 
                       <div className="school-card-content">
 
-                        <h3>{school.name}</h3>
+                        {/* <h3>{school.name}</h3> */}
 
-                        <p className="school-location">
+                        {/* <p className="school-location">
                           <MapPin size={14}/>
                           {school.location}
-                        </p>
+                        </p> */}
 
 
-                        <div className="school-stats">
+                        {/* <div className="school-stats">
 
                           <div>
                             <strong>
@@ -247,10 +247,10 @@ export default function PartnerPortal() {
                             </span>
                           </div>
 
-                        </div>
+                        </div> */}
 
 
-                        <div className="school-progress">
+                        {/* <div className="school-progress">
 
                           <div className="progress-heading">
                             <span>
@@ -273,18 +273,18 @@ export default function PartnerPortal() {
 
                           </div>
 
-                        </div>
+                        </div> */}
 
                       </div>
 
 
-                      <button
+                      {/* <button
                         className="view-school-button"
                         onClick={() => openSchool(school)}
                       >
                         View School
                         <span>→</span>
-                      </button>
+                      </button> */}
 
                     </article>
 

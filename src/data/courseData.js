@@ -595,8 +595,8 @@ export const studentProfile =[
   {
     firstName:"Avhik",
     lastName:"Sarkar",
-    studentId:"t",
-    password:"t",
+    studentId:"avhik12@gmail.com",
+    password:"avhik@123",
     class:7,
     moduleProgress:[4,2,1,3,2,1,3,3,3,0],
     lastWatchedModule:{
